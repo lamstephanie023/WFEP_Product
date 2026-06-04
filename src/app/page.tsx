@@ -16,32 +16,33 @@ export default function ResistFitApp() {
     const [timeLeft, setTimeLeft] = useState(180);
     const [isPaused, setIsPaused] = useState(false);
 
-    // Before/After Slider State
-    const sliderContainerRef = useRef<HTMLDivElement>(null);
-    const [sliderPos, setSliderPos] = useState(50);
-    const [isDragging, setIsDragging] = useState(false);
+ // Line 16: Replace the corrupted state setups down to the checkout form initialization:
+// Before/After Slider State
+const sliderContainerRef = useRef<HTMLDivElement>(null);
+const [sliderPos, setSliderPos] = useState<number>(50); // Explicitly type as number
+const [isDragging, setIsDragging] = useState<boolean>(false);
 
-    // AI Coach State
-    const [aiWeight, setAiWeight] = useState<number>(78);
-    const [aiHeight, setAiHeight] = useState<number>(175);
-    const [aiGoal, setAiGoal] = useState('Fat Loss');
-    const [aiResult, setAiResult] = useState<{ show: boolean; loading: boolean; text: string; kcal: number; protein: number }>({
-        show: false, loading: false, text: '', kcal: 0, protein: 0
-    });
+// AI Coach State
+const [aiWeight, setAiWeight] = useState<number>(78);
+const [aiHeight, setAiHeight] = useState<number>(175);
+const [aiGoal, setAiGoal] = useState<string>('Fat Loss');
+const [aiResult, setAiResult] = useState<{ show: boolean; loading: boolean; text: string; kcal: number; protein: number }>({
+  show: false, loading: false, text: '', kcal: 0, protein: 0
+});
 
-    // Gamification State
-    const [streakDays, setStreakDays] = useState<number[]>([1, 2, 3, 4, 5, 6]);
+// Gamification State
+const [streakDays, setStreakDays] = useState<number[]>([1, 2, 3, 4, 5]);
 
-    // Modal States
-    const [modals, setModals] = useState({
-        checkout: false,
-        alert: false,
-        selectedPlan: '',
-        alertTitle: '',
-        alertMessage: '',
-        alertSuccess: true,
-    });
-    const [checkoutForm, setCheckoutForm] = useState({ name: '', phone: '' });
+// Modal States
+const [modals, setModals] = useState({
+  checkout: false,
+  alert: false,
+  selectedPlan: '',
+  alertTitle: '',
+  alertMessage: '',
+  alertSuccess: true,
+});
+const [checkoutForm, setCheckoutForm] = useState({ name: '', phone: '' });
 
     // --- Video Simulation Logic ---
     useEffect(() => {
@@ -86,40 +87,41 @@ export default function ResistFitApp() {
         else if (timeLeft <= 120) videoTip = 'AI 貼士：臀部收緊，重心放在腳後跟';
         else videoTip = 'AI 貼士：切勿聳肩，保持腹部收緊';
     }
-
-    // --- Before/After Slider Logic ---
-    const handleSliderMove = useCallback((clientX: number) => {
-        if (!sliderContainerRef.current) return;
-        const rect = sliderContainerRef.current.getBoundingClientRect();
-        const offsetX = clientX - rect.left;
-        let percentage = (offsetX / rect.width) * 100;
-        percentage = Math.max(0, Math.min(100, percentage));
-        setSliderPos(percentage);
-    }, []);
-
-    useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            if (isDragging) handleSliderMove(e.clientX);
-        };
-        const handleMouseUp = () => setIsDragging(false);
-        const handleTouchMove = (e: TouchEvent) => {
-            if (isDragging) handleSliderMove(e.touches[0].clientX);
-        };
-
-        if (isDragging) {
-            window.addEventListener('mousemove', handleMouseMove);
-            window.addEventListener('mouseup', handleMouseUp);
-            window.addEventListener('touchmove', handleTouchMove);
-            window.addEventListener('touchend', handleMouseUp);
-        }
-
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('mouseup', handleMouseUp);
-            window.removeEventListener('touchmove', handleTouchMove);
-            window.removeEventListener('touchend', handleMouseUp);
-        };
-    }, [isDragging, handleSliderMove]);
+// Line 65: Replace the existing Before/After Slider Logic hook completely:
+// Before/After Slider Logic
+const handleSliderMove = useCallback((clientX: number) => {
+    if (!sliderContainerRef.current) return;
+    const rect = sliderContainerRef.current.getBoundingClientRect();
+    const offsetX = clientX - rect.left;
+    let percentage = (offsetX / rect.width) * 100;
+    percentage = Math.max(0, Math.min(100, percentage));
+    setSliderPos(percentage);
+  }, []);
+  
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (isDragging) handleSliderMove(e.clientX);
+    };
+    const handleMouseUp = () => setIsDragging(false);
+  
+    const handleTouchMove = (e: TouchEvent) => {
+      if (isDragging && e.touches[0]) handleSliderMove(e.touches[0].clientX);
+    };
+  
+    if (isDragging) {
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+      window.addEventListener('touchmove', handleTouchMove, { passive: true });
+      window.addEventListener('touchend', handleMouseUp);
+    }
+  
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleMouseUp);
+    };
+  }, [isDragging, handleSliderMove]);
 
     // --- AI Coaching Logic ---
     const showAlert = (title: string, message: string, success: boolean = true) => {
@@ -488,47 +490,83 @@ export default function ResistFitApp() {
                 </div>
             </section>
 
-            {/* Transformation Slider */}
-            <section id="transformation" className="py-16 bg-white border-t border-slate-200">
-                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center space-y-3 mb-12">
-                        <span className="px-3 py-1 bg-[#FDF2E9] text-[#E67E22] text-xs font-black tracking-widest uppercase rounded">PROVEN RESULTS</span>
-                        <h2 className="text-3xl sm:text-4xl font-extrabold text-[#2C3E50]">看看同行的蜕變成果</h2>
-                        <p className="text-sm text-slate-500 max-w-lg mx-auto">真實學員：31歲地產經紀 Anson，利用行街、坐舖時間配合彈力帶，12週減脂增肌。</p>
-                    </div>
+        {/* Line 260: Transformation Slider Section */}
+<section id="transformation" className="py-16 bg-white border-t border-slate-200">
+  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center space-y-3 mb-12">
+      <span className="px-3 py-1 bg-[#FDF2E9] text-[#E67E22] text-xs font-black tracking-widest uppercase rounded">
+        PROVEN RESULTS
+      </span>
+      <h2 className="text-3xl sm:text-4xl font-extrabold text-[#2C3E50]">看看同行的蛻變成果</h2>
+      <p className="text-sm text-slate-500 max-w-lg mx-auto">
+        真實學員:31歲地產經紀 Anson 利用行街、坐舖時間配合彈力帶,12週減脂增肌。
+      </p>
+    </div>
 
-                    <div 
-                        ref={sliderContainerRef}
-                        className="relative w-full aspect-[4/3] max-w-2xl mx-auto rounded-3xl overflow-hidden border-4 border-slate-200 shadow-xl select-none"
-                        onMouseDown={(e) => { setIsDragging(true); handleSliderMove(e.clientX); }}
-                        onTouchStart={(e) => { setIsDragging(true); handleSliderMove(e.touches[0].clientX); }}
-                    >
-                        <div className="absolute inset-0 bg-slate-200">
-                            <img src="https://images.unsplash.com/photo-1605296867304-46d5465a25f1?q=80&w=1200&auto=format&fit=crop" className="w-full h-full object-cover" alt="After" />
-                            <div className="absolute bottom-4 right-4 bg-[#2ECC71] text-white font-black text-xs px-3 py-1.5 rounded-lg shadow-lg">
-                                12週後：體脂 13% 鋼鐵腹肌
-                            </div>
-                        </div>
+    {/* Interactive Container */}
+    <div
+      ref={sliderContainerRef}
+      className="relative w-full aspect-[4/3] max-w-2xl mx-auto rounded-3xl overflow-hidden border-4 border-slate-200 shadow-xl select-none cursor-ew-resize"
+      onMouseDown={(e) => {
+        setIsDragging(true);
+        handleSliderMove(e.clientX);
+      }}
+      onTouchStart={(e) => {
+        setIsDragging(true);
+        if (e.touches[0]) handleSliderMove(e.touches[0].clientX);
+      }}
+    >
+      {/* Background Layer: After Image */}
+      <div className="absolute inset-0 bg-slate-200">
+        <img 
+          src="https://images.unsplash.com/photo-1605296867304-46d5465a25f1?q=80&w=1200&auto=format&fit=crop" 
+          className="w-full h-full object-cover" 
+          alt="After" 
+          draggable={false}
+        />
+        <div className="absolute bottom-4 right-4 bg-[#2ECC71] text-white font-black text-xs px-3 py-1.5 rounded-lg shadow-lg">
+          12週後:體脂 13% 鋼鐵腹肌
+        </div>
+      </div>
 
-                        <div className="absolute inset-y-0 left-0 right-0 overflow-hidden" style={{ width: `${sliderPos}%` }}>
-                            <div className="absolute inset-0 w-full h-full" style={{ width: `${100 / (sliderPos / 100)}%`}}>
-                                <img src="https://images.unsplash.com/photo-1598151372479-02c89405c9db?q=80&w=1200&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover grayscale brightness-90" alt="Before" />
-                                <div className="absolute bottom-4 left-4 bg-[#E67E22] text-white font-black text-xs px-3 py-1.5 rounded-lg shadow-lg whitespace-nowrap">
-                                    Before：久坐肚腩 / 體脂 26% / 腰酸背痛
-                                </div>
-                            </div>
-                        </div>
+      {/* Foreground Layer: Before Image Masked */}
+      <div 
+        className="absolute inset-y-0 left-0 overflow-hidden transition-all duration-75" 
+        style={{ width: `${sliderPos}%` }}
+      >
+        <div 
+          className="absolute inset-y-0 left-0 h-full"
+          style={{ width: sliderContainerRef.current ? sliderContainerRef.current.getBoundingClientRect().width : '600px' }}
+        >
+          <img 
+            src="https://images.unsplash.com/photo-1598151372479-02c89405c9db?q=80&w=1200&auto=format&fit=crop" 
+            className="absolute inset-0 w-full h-full object-cover grayscale brightness-90" 
+            alt="Before" 
+            draggable={false}
+          />
+          <div className="absolute bottom-4 left-4 bg-[#E67E22] text-white font-black text-xs px-3 py-1.5 rounded-lg shadow-lg whitespace-nowrap">
+            Before:久坐肚腩 / 體脂 26% / 腰酸背痛
+          </div>
+        </div>
+      </div>
 
-                        <div className="absolute inset-y-0 bottom-0 top-0 w-1 bg-[#E67E22] cursor-ew-resize flex items-center justify-center" style={{ left: `${sliderPos}%` }}>
-                            <div className="w-10 h-10 bg-[#E67E22] text-white rounded-full flex items-center justify-center shadow-2xl border-2 border-white pointer-events-none transform -translate-x-[4.5px] hover:scale-110 transition duration-150">
-                                <MoveHorizontal size={16} />
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <p className="text-center text-xs text-slate-500 mt-4 flex justify-center items-center gap-1"><Info size={14} className="text-[#2ECC71]"/> 左右拖拽橙色滑桿，實時對比身材前後改變。</p>
-                </div>
-            </section>
+      {/* Slider Control Divider Bar */}
+      <div 
+        className="absolute inset-y-0 w-1 bg-[#E67E22] flex items-center justify-center pointer-events-none"
+        style={{ left: `${sliderPos}%` }}
+      >
+        <div className="w-10 h-10 bg-[#E67E22] text-white rounded-full flex items-center justify-center shadow-2xl border-2 border-white transform -translate-x-[2px]">
+          <MoveHorizontal size={16} />
+        </div>
+      </div>
+    </div>
+
+    <p className="text-center text-xs text-slate-500 mt-4 flex justify-center items-center gap-1">
+      <Info size={14} className="text-[#2ECC71]"/> 
+      左右拖拽橙色滑桿,實時對比身材前後改變。
+    </p>
+  </div>
+</section>
 
             {/* AI Coach */}
             <section id="aicoach" className="py-16 bg-[#FAFAFA] relative border-t border-slate-200">
