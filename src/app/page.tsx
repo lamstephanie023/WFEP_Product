@@ -519,7 +519,7 @@ const handleSliderMove = useCallback((clientX: number) => {
       {/* Background Layer: After Image */}
       <div className="absolute inset-0 bg-slate-200">
         <img 
-          src="/image/demo-slider-day.png" 
+          src="/image/demo-slider-night.png" 
           className="w-full h-full object-cover" 
           alt="After" 
           draggable={false}
@@ -539,8 +539,8 @@ const handleSliderMove = useCallback((clientX: number) => {
           style={{ width: sliderContainerRef.current ? sliderContainerRef.current.getBoundingClientRect().width : '600px' }}
         >
           <img 
-            src="demo-slider-night.png" 
-            className="absolute inset-0 w-full h-full object-cover grayscale brightness-90" 
+            src="/image/demo-slider-day.png" 
+            className="absolute inset-0 w-full h-full object-cover" 
             alt="Before" 
             draggable={false}
           />
