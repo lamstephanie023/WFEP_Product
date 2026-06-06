@@ -3,7 +3,6 @@ import { DM_Sans, Fraunces } from "next/font/google";
 import { CartDrawer } from "@/components/CartDrawer";
 import { CookieBanner } from "@/components/CookieBanner";
 import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
 import { CartProvider } from "@/context/CartContext";
 import { CookieProvider } from "@/context/CookieContext";
 import "./globals.css";
@@ -38,7 +37,7 @@ export default function RootLayout({
         <CookieProvider>
           <CartProvider>
             <div className="flex min-h-screen flex-col">
-              <Header />
+              {/* WFEP Header was removed from here so only ResistFit shows up */}
               <main className="flex-1">{children}</main>
               <Footer />
             </div>

@@ -16,6 +16,12 @@ export default function ResistFitApp() {
     const [timeLeft, setTimeLeft] = useState(180);
     const [isPaused, setIsPaused] = useState(false);
 
+    // Slider Tracking States
+    const [currentSlide, setCurrentSlide] = useState<number>(0);
+    const [isSliderPlaying, setIsSliderPlaying] = useState<boolean>(true);
+
+
+
  // Line 16: Replace the corrupted state setups down to the checkout form initialization:
 // Before/After Slider State
 const sliderContainerRef = useRef<HTMLDivElement>(null);
@@ -44,6 +50,53 @@ const [modals, setModals] = useState({
 });
 const [checkoutForm, setCheckoutForm] = useState({ name: '', phone: '' });
 
+
+
+
+
+// --- Apple Scroll Fade-In Animation Logic ---
+useEffect(() => {
+    const observerOptions = {
+        root: null,
+        rootMargin: "0px 0px -12% 0px", // Triggers slightly before entry for a crisp feel
+        threshold: 0.05
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                // Staggered layout: Animate children one by one
+                if (entry.target.classList.contains('apple-stagger-container')) {
+                    const items = entry.target.querySelectorAll('.apple-stagger-item');
+                    items.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.classList.remove('opacity-0', 'translate-y-14');
+                            item.classList.add('opacity-100', 'translate-y-0');
+                        }, index * 220); // 220ms delay between each card's entry
+                    });
+                } else {
+                    // Standard layout: Animate the entire row/element at once
+                    entry.target.classList.remove('opacity-0', 'translate-y-14');
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                }
+                // Stop watching once animated to keep performance blazing fast
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Find all elements marked for animation
+    const animElements = document.querySelectorAll('.apple-fade-in, .apple-stagger-container');
+    animElements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+}, []);
+
+
+
+
+
+
     // --- Video Simulation Logic ---
     useEffect(() => {
         let timer: NodeJS.Timeout;
@@ -56,6 +109,20 @@ const [checkoutForm, setCheckoutForm] = useState({ name: '', phone: '' });
         }
         return () => clearInterval(timer);
     }, [videoState, isPaused, timeLeft]);
+
+
+// Engine Driving the Continuous Right-To-Left Loop
+    useEffect(() => {
+        if (!isSliderPlaying) return;
+
+        const timerId = setInterval(() => {
+            setCurrentSlide((prev) => (prev + 1) % 3); // Loops smoothly across 3 entries
+        }, 5000); // 5-second rotation speed interval
+
+        return () => clearInterval(timerId);
+    }, [isSliderPlaying]);
+
+
 
     const videoProgress = ((180 - timeLeft) / 180) * 100;
     const kcalBurned = Math.floor((180 - timeLeft) * 0.15);
@@ -210,8 +277,13 @@ const handleSliderMove = useCallback((clientX: number) => {
         setCheckoutForm({ name: '', phone: '' });
     };
 
+
+
+
+    /*Header setting*/
     return (
-        <div className="min-h-screen bg-[#FAFAFA] text-[#2C3E50] font-sans antialiased overflow-x-hidden">
+        <>
+            {/* Base Styling */}
             <style dangerouslySetInnerHTML={{__html: `
                 .premium-shadow { box-shadow: 0 10px 30px -10px rgba(44, 62, 80, 0.08); }
                 .glow-green { box-shadow: 0 10px 30px -5px rgba(46, 204, 113, 0.15); }
@@ -222,8 +294,8 @@ const handleSliderMove = useCallback((clientX: number) => {
                 ::-webkit-scrollbar-thumb:hover { background: #2ECC71; }
             `}} />
 
-            {/* Navbar */}
-            <nav className="sticky top-0 z-50 bg-[#2C3E50] text-white shadow-md">
+            {/* Dark ResistFit Fixed Navbar - Moved OUTSIDE the wrapper so it cannot be trapped */}
+            <nav className="fixed top-0 left-0 right-0 w-full z-[9999] bg-[#2C3E50]/95 backdrop-blur-md text-white shadow-xl transition-all duration-300">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16 sm:h-20">
                         <div className="flex items-center gap-3">
@@ -252,6 +324,157 @@ const handleSliderMove = useCallback((clientX: number) => {
                     </div>
                 </div>
             </nav>
+
+            {/* Main Application Container - Now with top padding to account for the fixed header */}
+            <div className="min-h-screen bg-[#FAFAFA] text-[#2C3E50] font-sans antialiased overflow-x-hidden pt-16 sm:pt-20">
+                
+                {/* DO NOT CHANGE ANYTHING BELOW THIS LINE. Your hero section continues here... */}
+
+
+
+
+{/* Apple TV+ Cinematic Peeking Slide Deck */}
+<section className="relative w-full h-[75vh] sm:h-[85vh] bg-[#F5F5F7] py-10 overflow-hidden select-none">
+                
+                {/* Track Window with Center Alignment Math */}
+                <div 
+                    className="flex h-full gap-5 transition-transform duration-[850ms] ease-[cubic-bezier(0.25,1,0.4,1)]"
+                    style={{ 
+                        // Math: Centers active card (85vw) and moves by exactly card width + gap (85vw + 1.25vw gap)
+                        transform: `translate3d(calc(50vw - 42.5vw - ${currentSlide * 86.25}vw), 0px, 0px)` 
+                    }}
+                >
+                    {[
+                        {
+                            category: "獨家熱播中 · 動作美劇",
+                            title: "ANYTIME, ANYWHERE",
+                            desc: "一部電話、一條特製彈力帶。地產舖、示範單位、等客空檔，都是你的私人健身房。",
+                            primaryBtn: "立即播放 S1 E1",
+                            secondaryBtn: "了解更多細節",
+                            img: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1600&auto=format&fit=crop"
+                        },
+                        {
+                            category: "全新原創影集 · 勵志喜劇",
+                            title: "金牌經紀求生記",
+                            desc: "面對低迷市道，且看全港最頑強的銷售團隊如何靠著破舟意志與爆笑策略，逆風翻盤創造開單神話。",
+                            primaryBtn: "Book Now",
+                            secondaryBtn: "了解更多細節",
+                            img: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1600&auto=format&fit=crop"
+                        },
+                        {
+                            category: "深度紀實特輯 · 健康科技",
+                            title: "重塑核心：人體極限",
+                            desc: "追蹤尖端動態姿勢偵測技術如何與現代碎片化訓練結合，徹底改變久坐族群與經紀人士的腰椎健康命運。",
+                            primaryBtn: "觀看震撼預告片",
+                            secondaryBtn: "查看科技白皮書",
+                            img: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1600&auto=format&fit=crop"
+                        },
+                        {
+                            category: "深度紀實特輯 · 健康科技",
+                            title: "重塑核心：人體極限",
+                            desc: "追蹤尖端動態姿勢偵測技術如何與現代碎片化訓練結合，徹底改變久坐族群與經紀人士的腰椎健康命運。",
+                            primaryBtn: "觀看震撼預告片",
+                            secondaryBtn: "查看科技白皮書",
+                            img: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1600&auto=format&fit=crop"
+                        }
+                    ].map((slide, index) => {
+                        const isActive = currentSlide === index;
+                        return (
+                            <div 
+                                key={index} 
+                                onClick={() => setCurrentSlide(index)}
+                                className={`w-[85vw] h-full flex-shrink-0 relative rounded-[24px] sm:rounded-[32px] overflow-hidden cursor-pointer transition-all duration-[850ms] ease-[cubic-bezier(0.25,1,0.4,1)] ${
+                                    isActive 
+                                        ? 'scale-100 opacity-100 shadow-xl sm:shadow-2xl' 
+                                        : 'scale-[0.96] opacity-40 hover:opacity-60 shadow-sm'
+                                }`}
+                            >
+                                {/* Immersive Card Background Image */}
+                                <img 
+                                    src={slide.img} 
+                                    alt={slide.title} 
+                                    className="w-full h-full object-cover object-center pointer-events-none select-none"
+                                />
+                                
+                                {/* Cinematic Double-Gradient Shade */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent transition-opacity duration-500" />
+                                <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent" />
+
+                                {/* Text Content Overlay - Fixed at Bottom Left of Card */}
+                                <div className={`absolute bottom-12 sm:bottom-16 left-0 w-full px-6 sm:px-12 transition-all duration-700 delay-100 ${
+                                    isActive ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0 pointer-events-none'
+                                }`}>
+                                    <div className="max-w-3xl flex flex-col items-start text-left space-y-2 sm:space-y-3">
+                                        <span className="text-xs sm:text-sm font-black text-[#2ECC71] tracking-wider uppercase">
+                                            {slide.category}
+                                        </span>
+                                        <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
+                                            {slide.title}
+                                        </h2>
+                                        <p className="text-xs sm:text-base text-slate-200 font-medium line-clamp-2 sm:line-clamp-none max-w-2xl leading-relaxed">
+                                            {slide.desc}
+                                        </p>
+                                        
+                                        {/* Action Controls */}
+                                        <div className="pt-2 sm:pt-4 flex flex-wrap gap-3 items-center">
+                                            <button className="px-6 py-2.5 sm:px-8 sm:py-3.5 bg-white hover:bg-slate-100 text-slate-900 font-bold text-xs sm:text-sm rounded-full transition duration-200 active:scale-95 flex items-center gap-2 shadow-md">
+                                                <Play size={14} fill="currentColor" />
+                                                {slide.primaryBtn}
+                                            </button>
+                                            <button className="px-6 py-2.5 sm:px-8 sm:py-3.5 bg-white/20 hover:bg-white/30 backdrop-blur-md text-white font-bold text-xs sm:text-sm rounded-full transition duration-200 active:scale-95 border border-white/10">
+                                                {slide.secondaryBtn}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+
+                {/* Bottom Synchronized Media Controller Subsystem */}
+                <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-30 bg-white/80 dark:bg-black/40 backdrop-blur-xl px-5 py-2.5 rounded-full border border-slate-200/50 dark:border-white/15 flex items-center gap-5 shadow-lg">
+                    {/* Apple Dash Slider Navigation Controls */}
+                    <div className="flex items-center gap-2.5">
+                        {[0, 1, 2].map((idx) => (
+                            <button
+                                key={idx}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setCurrentSlide(idx);
+                                }}
+                                className={`h-1.5 transition-all duration-500 rounded-full ${
+                                    currentSlide === idx ? 'w-7 bg-slate-900 dark:bg-white' : 'w-1.5 bg-slate-400/50 dark:bg-white/30 hover:bg-slate-500'
+                                }`}
+                                aria-label={`Slide target panel ${idx + 1}`}
+                            />
+                        ))}
+                    </div>
+
+                    {/* Clean Border Separator Divider */}
+                    <div className="w-[1px] h-3.5 bg-slate-300 dark:bg-white/20" />
+
+                    {/* Integrated Playback Interrupter Manager Button */}
+                    <button 
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setIsSliderPlaying(!isSliderPlaying);
+                        }}
+                        className="text-slate-800 dark:text-white hover:text-[#2ECC71] dark:hover:text-[#2ECC71] transition-colors duration-200 focus:outline-none"
+                    >
+                        {isSliderPlaying ? (
+                            <Pause size={14} fill="currentColor" strokeWidth={1} />
+                        ) : (
+                            <Play size={14} fill="currentColor" strokeWidth={1} />
+                        )}
+                    </button>
+                </div>
+            </section>
+
+
+
+
+
 
             {/* Hero Section */}
             <section id="painpoints" className="relative py-12 lg:py-24 overflow-hidden bg-[#FAFAFA]">
@@ -357,6 +580,8 @@ const handleSliderMove = useCallback((clientX: number) => {
                 </div>
             </section>
 
+
+
             {/* Painpoint 2 */}
             <section id="concept" className="py-16 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -408,6 +633,197 @@ const handleSliderMove = useCallback((clientX: number) => {
                     </div>
                 </div>
             </section>
+
+
+
+
+
+{/* Apple-Style 3-Column Reasons Section (Unified Row Fade-In) */}
+<section className="py-20 bg-[#F5F5F7] border-t border-slate-200/50">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    {/* Big Bold Section Title */}
+                    <div className="text-center max-w-3xl mx-auto mb-16 apple-fade-in opacity-0 translate-y-14 transition-all duration-[1000ms] ease-[cubic-bezier(0.25,1,0.5,1)]">
+                        <h2 className="text-4xl sm:text-5xl font-black text-[#2C3E50] tracking-tight leading-tight">
+                            打造高產出、高效率日常的強大理由
+                        </h2>
+                    </div>
+
+                    {/* 3 Columns Grid Content Fades Up Completely as One Unit */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 apple-fade-in opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)]">
+                        
+                        {/* Column 1 */}
+                        <div className="bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between min-h-[480px] pt-10 px-8 border border-slate-100 text-center group">
+                            <div className="flex flex-col items-center">
+                                <h3 className="text-xl sm:text-2xl font-bold text-[#2C3E50] tracking-tight leading-snug max-w-[260px] mb-3">
+                                    隨手一拉，任何地方化身成專屬健身房。
+                                </h3>
+                                <a href="#concept" className="text-sm font-semibold text-[#0066cc] hover:underline inline-flex items-center gap-0.5 group/link">
+                                    <span>了解更多隨時訓練方案</span>
+                                    <span className="text-xs transform transition-transform group-hover/link:translate-x-1 font-mono">&gt;</span>
+                                </a>
+                            </div>
+                            <div className="w-full mt-8 flex justify-center items-end">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=500&auto=format&fit=crop" 
+                                    alt="Training Space" 
+                                    className="max-h-[220px] w-auto object-contain object-bottom rounded-t-xl transition-transform duration-500 group-hover:scale-[1.02]"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Column 2 */}
+                        <div className="bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between min-h-[480px] pt-10 px-8 border border-slate-100 text-center group">
+                            <div className="flex flex-col items-center">
+                                <h3 className="text-xl sm:text-2xl font-bold text-[#2C3E50] tracking-tight leading-snug max-w-[260px] mb-3">
+                                    完美計算每日所需營養，無痛維持極佳狀態。
+                                </h3>
+                                <a href="#aicoach" className="text-sm font-semibold text-[#0066cc] hover:underline inline-flex items-center gap-0.5 group/link">
+                                    <span>了解更多 AI 飲食計算</span>
+                                    <span className="text-xs transform transition-transform group-hover/link:translate-x-1 font-mono">&gt;</span>
+                                </a>
+                            </div>
+                            <div className="w-full mt-8 flex justify-center items-end">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=500&auto=format&fit=crop" 
+                                    alt="Nutrition Tracking" 
+                                    className="max-h-[220px] w-auto object-contain object-bottom rounded-t-xl transition-transform duration-500 group-hover:scale-[1.02]"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Column 3 */}
+                        <div className="bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between min-h-[480px] pt-10 pb-12 px-8 border border-slate-100 text-center group">
+                            <div className="flex flex-col items-center">
+                                <h3 className="text-xl sm:text-2xl font-bold text-[#2C3E50] tracking-tight leading-snug max-w-[260px] mb-3">
+                                    用流汗累積開單能量，全港經紀激勵排行。
+                                </h3>
+                                <a href="#pricing" className="text-sm font-semibold text-[#0066cc] hover:underline inline-flex items-center gap-0.5 group/link">
+                                    <span>了解更多同行激勵機制</span>
+                                    <span className="text-xs transform transition-transform group-hover/link:translate-x-1 font-mono">&gt;</span>
+                                </a>
+                            </div>
+                            <div className="w-full mt-auto flex flex-col justify-center items-center px-4">
+                                <p className="text-2xl sm:text-3xl font-black tracking-tight leading-tight bg-clip-text text-transparent bg-gradient-to-br from-orange-400 via-pink-500 to-indigo-600">
+                                    「AI 教練，幫我規劃今日10分鐘坐舖伸展菜單」
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+
+
+
+
+
+
+{/* Apple-Style 2x2 Premium Grid Section (Staggered Fade-In) */}
+<section className="py-20 bg-[#F5F5F7]">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    {/* Section Title */}
+                    <div className="text-center max-w-2xl mx-auto mb-16 apple-fade-in opacity-0 translate-y-14 transition-all duration-[1000ms] ease-[cubic-bezier(0.25,1,0.5,1)]">
+                        <h2 className="text-3xl font-black text-[#2C3E50] tracking-tight sm:text-5xl">
+                            專為忙碌經紀設計的核心配置
+                        </h2>
+                        <p className="mt-4 text-base sm:text-lg text-slate-500 font-medium">
+                            不論坐舖定睇樓，隨時隨地開啟極簡、高效的健康日常。
+                        </p>
+                    </div>
+
+                    {/* Stagger Container */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 apple-stagger-container">
+                        
+                        {/* Card 1 */}
+                        <div className="apple-stagger-item opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between min-h-[520px] border border-slate-100 group">
+                            <div className="p-10 sm:p-12 flex flex-col items-start text-left">
+                                <span className="text-[11px] font-black tracking-widest text-[#2ECC71] uppercase block mb-2">全新產品</span>
+                                <h3 className="text-2xl sm:text-3xl font-black text-[#2C3E50] tracking-tight mb-3">智能感應彈力帶</h3>
+                                <p className="text-sm sm:text-base text-slate-500 leading-relaxed mb-6 max-w-md">精準追蹤拉伸力道與動作幅度，數據即時同步手機 APP，讓每分鐘碎片的訓練都更有價值。</p>
+                                <button className="px-6 py-2.5 bg-[#2C3E50] hover:bg-slate-800 text-white text-xs font-bold rounded-full transition-colors tracking-wide">
+                                    了解更多
+                                </button>
+                            </div>
+                            <div className="w-full overflow-hidden aspect-[16/10]">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1000&auto=format&fit=crop" 
+                                    alt="Smart Band" 
+                                    className="w-full h-full object-cover object-center group-hover:scale-102 transition duration-700 ease-out"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Card 2 */}
+                        <div className="apple-stagger-item opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between min-h-[520px] border border-slate-100 group">
+                            <div className="p-10 sm:p-12 flex flex-col items-start text-left">
+                                <span className="text-[11px] font-black tracking-widest text-slate-400 uppercase block mb-2">特設功能</span>
+                                <h3 className="text-2xl sm:text-3xl font-black text-[#2C3E50] tracking-tight mb-3">1對1 AI 智能教練</h3>
+                                <p className="text-sm sm:text-base text-slate-500 leading-relaxed mb-6 max-w-md">專為地產經紀坐舖、睇樓空檔設計的動作菜單。隨手一拉，即刻激活深層肌肉、注入能量。</p>
+                                <button className="px-6 py-2.5 bg-[#2C3E50] hover:bg-slate-800 text-white text-xs font-bold rounded-full transition-colors tracking-wide">
+                                    立即體驗
+                                </button>
+                            </div>
+                            <div className="w-full overflow-hidden aspect-[16/10]">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1000&auto=format&fit=crop" 
+                                    alt="AI Coach" 
+                                    className="w-full h-full object-cover object-center group-hover:scale-102 transition duration-700 ease-out"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Card 3 */}
+                        <div className="apple-stagger-item opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between min-h-[520px] border border-slate-100 group">
+                            <div className="p-10 sm:p-12 flex flex-col items-start text-left">
+                                <span className="text-[11px] font-black tracking-widest text-slate-400 uppercase block mb-2">經紀社群</span>
+                                <h3 className="text-2xl sm:text-3xl font-black text-[#2C3E50] tracking-tight mb-3">菁英同行激勵榜</h3>
+                                <p className="text-sm sm:text-base text-slate-500 leading-relaxed mb-6 max-w-md">與全港地產同行一邊保持健康、一邊累積點數！用流汗換來的積分還能直接換取額外開單獎賞。</p>
+                                <button className="px-6 py-2.5 bg-[#2C3E50] hover:bg-slate-800 text-white text-xs font-bold rounded-full transition-colors tracking-wide">
+                                    加入社群
+                                </button>
+                            </div>
+                            <div className="w-full overflow-hidden aspect-[16/10]">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=1000&auto=format&fit=crop" 
+                                    alt="Community" 
+                                    className="w-full h-full object-cover object-center group-hover:scale-102 transition duration-700 ease-out"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Card 4 */}
+                        <div className="apple-stagger-item opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between min-h-[520px] border border-slate-100 group">
+                            <div className="p-10 sm:p-12 flex flex-col items-start text-left">
+                                <span className="text-[11px] font-black tracking-widest text-[#E67E22] uppercase block mb-2">健康防護</span>
+                                <h3 className="text-2xl sm:text-3xl font-black text-[#2C3E50] tracking-tight mb-3">動態姿勢精準修正</h3>
+                                <p className="text-sm sm:text-base text-slate-500 leading-relaxed mb-6 max-w-md">透過鏡頭動態捕捉智能偵測，秒速糾正錯誤姿態，有效預防經紀因久坐或長期站立導致的腰肌勞損。</p>
+                                <button className="px-6 py-2.5 bg-[#2C3E50] hover:bg-slate-800 text-white text-xs font-bold rounded-full transition-colors tracking-wide">
+                                    了解防護
+                                </button>
+                            </div>
+                            <div className="w-full overflow-hidden aspect-[16/10]">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1594882645126-14020914d58d?q=80&w=1000&auto=format&fit=crop" 
+                                    alt="Posture" 
+                                    className="w-full h-full object-cover object-center group-hover:scale-102 transition duration-700 ease-out"
+                                />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+
+
+
+
+
 
             {/* Video Player */}
             <section id="demo" className="py-16 bg-[#FAFAFA] relative">
@@ -959,6 +1375,7 @@ const handleSliderMove = useCallback((clientX: number) => {
                     </div>
                 </div>
             </footer>
-        </div>
+            </div>
+        </>
     );
 }
