@@ -26,11 +26,16 @@ export default function ResistFitApp() {
         }
     }, [isPaused, videoState]);
 
+    // Log-in States //
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+    const [loginStep, setLoginStep] = useState('form'); // 'form' | 'progress'
 
 
-// Slider Tracking States
-const [currentSlide, setCurrentSlide] = useState<number>(0);
-const [isSliderPlaying, setIsSliderPlaying] = useState<boolean>(true);
+    // Slider Tracking States
+    const [currentSlide, setCurrentSlide] = useState<number>(0);
+    const [isSliderPlaying, setIsSliderPlaying] = useState<boolean>(true);
+
+
 
 // 1. ADD THE SLIDES ARRAY HERE (Before the useEffect)
 const slides = [
@@ -38,55 +43,74 @@ const slides = [
         category: "專為28-35歲+ 地產從業員設計",
         title: "ANYTIME, ANYWHERE",
         desc: "一部電話、一條特製彈力帶。地產舖、示範單位、等客空檔，都是你的私人健身房。",
-        primaryBtn: "立即訂閱",
-        secondaryBtn: "了解更多細節",
-        img: "/image/demo-001.png"
+        primaryBtn: "立即訂閱", // Changed text to match image
+        secondaryBtn: "成功例子",       // Left empty to remove the button entirely
+        img: "/image/demo-001.png",
+        hidePlayIcon: true,     // Removes the play symbol
+        actionPrimary: "scrollToPricing", // Adds scroll functionality
+        actionSecondary: "transformationSec",
+        customPrimaryBtnClass: "bg-[#E67E22] hover:bg-[#D35400] text-white" // Custom Orange color
     },
     {
         category: "碎片時間救星",
         title: "生活冇時間運動？",
-        desc: "開單忙、坐舖悶？收工攰到根本去唔到Gym Room？食晏、坐舖、碎片時間就可以練，唔阻做嘢又有AI與真人PT雙重加持嘅彈力帶神級方案！",
+        desc: "開單忙、坐舖悶？收工攰到根本去唔到Gym Room？食晏、坐舖、碎片時間就可以練，唔阻做嘢又有AI與真人雙重加持嘅彈力帶神級方案！",
         primaryBtn: "AI 專屬熱量估算",
-        secondaryBtn: "彈力帶神級方案",
-        img: "/image/demo-002.png"
+        secondaryBtn: "", // Left empty to remove the button entirely
+        img: "/image/demo-002.png", // Keep your existing image file path here
+        hidePlayIcon: true,
+        action: "scrollToCard4",
+        customPrimaryBtnClass: "bg-[#E67E22] hover:bg-[#D35400] text-white"
     },
     {
-        category: "專為舖頭辦公椅設計的拉伸彈力操",
+        category: "專為鋪頭辦公椅設計的拉伸彈力操",
         title: "企足全日、久坐腰酸？",
         desc: "追蹤尖端動態姿勢偵測技術如何與現代碎片化訓練結合，徹底改變久坐族群與經紀人士的腰椎健康命運。",
         primaryBtn: "試玩3分鐘訓練",
         secondaryBtn: "了解更多細節",
-        img: "/image/demo-003.png"
+        img: "/image/demo-003.png", // Keep your existing image file path here
+        hidePlayIcon: false,       // Keep the play symbol visible as seen in the mockup
+        actionPrimary: "scrollToCard3",   // Target element selector for primary click
+        actionSecondary: "scrollToPricing", // Target element selector for secondary click
+        customPrimaryBtnClass: "bg-[#E67E22] hover:bg-[#D35400] text-white"
     },
     {
-        category: "連續 21 日打卡挑戰",
-        title: "送：進階版金屬扣抗阻彈力帶",
-        desc: "經紀工作生活繁忙，連續打卡 21 天，即刻免費速遞一套價值 HK$299 專業五階金屬扣彈力帶，幫你升級訓練！",
-        primaryBtn: "立即訂閱",
+        category: "極簡美學與極致工藝的結合", // Keep your original text if different
+        title: "精心打造的專屬配件",       // Keep your original text if different
+        desc: "航天級鋁合金扣具與高密度雙色編織彈力帶，不僅是健身工具，更是襯托專業形象的隨身精品。", // Keep original text
+        primaryBtn: "產品特性",
         secondaryBtn: "了解更多細節",
-        img: "/image/demo-slider-day.png"
+        img: "/image/demo-002.png", // Keep your existing image file path here
+        hidePlayIcon: true,        // Removes the play symbol
+        actionPrimary: "scrollToCard1",   // Target element selector for primary click
+        actionSecondary: "scrollToPricing", // Target element selector for secondary click
+        customPrimaryBtnClass: "bg-[#E67E22] hover:bg-[#D35400] text-white" // Gorgeous Orange
     },
+    // --- NEW SLIDE 5 ADDED HERE ---
     {
-        category: "3個月（Quarterly）大挑戰",
+        category: "3個月 (QUARTERLY) 大挑戰",
         title: "續約 75 折起超值優惠",
-        desc: "每季只要達到我們所設定的體脂率 / 肌肉增加標準（由 1:1 PT 通過每月遙距評估確認），下個季度的續約即自動獲取「尊爵經紀 75 折續約優惠價」，最少節省上千元！",
+        desc: "每季只要達到我們所設定的體脂率 / 肌肉增加標準 (由 1:1 PT 通過每月遙距評估確認)，下個季度的續約即自動獲取「尊爵經紀 75 折續約優惠價」，最少節省上千元！",
         primaryBtn: "季度挑戰成功價：HK$1,548",
         secondaryBtn: "原價季度續約：HK$2,064",
-        img: "/image/demo-slider-day.png"
+        img: "/image/demo-003.png", // Make sure to match your actual image file name
+        hidePlayIcon: true,
+        action: "scrollToPricing",
+        customPrimaryBtnClass: "bg-[#E67E22] hover:bg-[#D35400] text-white", // Custom Orange
+        customSecondaryBtnClass: "line-through text-slate-300" // Strikethrough style
     }
 ];
 
 // Engine Driving the Continuous Right-To-Left Loop
 useEffect(() => {
-    if (!isSliderPlaying) return;
+    if (!isSliderPlaying || !slides || slides.length === 0) return;
 
     const timerId = setInterval(() => {
-        // FIXED: Now uses slides.length instead of hardcoding the number 3
         setCurrentSlide((prev) => (prev + 1) % slides.length); 
     }, 5000); 
 
     return () => clearInterval(timerId);
-}, [isSliderPlaying]);
+}, [isSliderPlaying, slides.length]); // Added slides.length to guarantee fresh values
 
 
 
@@ -126,38 +150,48 @@ const [checkoutForm, setCheckoutForm] = useState({ name: '', phone: '' });
 
 
 
-// --- Apple Scroll Fade-In Animation Logic ---
+// --- Apple Scroll Fade-In Animation Logic (Infinite Loop Version) ---
 useEffect(() => {
     const observerOptions = {
         root: null,
-        rootMargin: "0px 0px -12% 0px", // Triggers slightly before entry for a crisp feel
+        rootMargin: "0px 0px -10% 0px", // Triggers just inside the frame for a clean look
         threshold: 0.05
     };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                // Staggered layout: Animate children one by one
+                // === SCROLLING IN: SHOW THE ELEMENTS ===
                 if (entry.target.classList.contains('apple-stagger-container')) {
                     const items = entry.target.querySelectorAll('.apple-stagger-item');
                     items.forEach((item, index) => {
                         setTimeout(() => {
                             item.classList.remove('opacity-0', 'translate-y-14');
                             item.classList.add('opacity-100', 'translate-y-0');
-                        }, index * 220); // 220ms delay between each card's entry
+                        }, index * 180); // 180ms delay for a snappy staggered feel
                     });
                 } else {
-                    // Standard layout: Animate the entire row/element at once
                     entry.target.classList.remove('opacity-0', 'translate-y-14');
                     entry.target.classList.add('opacity-100', 'translate-y-0');
                 }
-                // Stop watching once animated to keep performance blazing fast
-                observer.unobserve(entry.target);
+            } else {
+                // === SCROLLING OUT: RESET RESET BACK TO HIDDEN ===
+                if (entry.target.classList.contains('apple-stagger-container')) {
+                    const items = entry.target.querySelectorAll('.apple-stagger-item');
+                    items.forEach((item) => {
+                        // Instantly reset layout positions without laggy delays
+                        item.classList.remove('opacity-100', 'translate-y-0');
+                        item.classList.add('opacity-0', 'translate-y-14');
+                    });
+                } else {
+                    entry.target.classList ? entry.target.classList.remove('opacity-100', 'translate-y-0') : null;
+                    entry.target.classList.add('opacity-0', 'translate-y-14');
+                }
             }
         });
     }, observerOptions);
 
-    // Find all elements marked for animation
+    // Scan and track all configured targets across the entire DOM tree
     const animElements = document.querySelectorAll('.apple-fade-in, .apple-stagger-container');
     animElements.forEach((el) => observer.observe(el));
 
@@ -182,17 +216,6 @@ useEffect(() => {
         return () => clearInterval(timer);
     }, [videoState, isPaused, timeLeft]);
 
-
-// Engine Driving the Continuous Right-To-Left Loop
-    useEffect(() => {
-        if (!isSliderPlaying) return;
-
-        const timerId = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % 3); // Loops smoothly across 3 entries
-        }, 5000); // 5-second rotation speed interval
-
-        return () => clearInterval(timerId);
-    }, [isSliderPlaying]);
 
 
 
@@ -352,55 +375,79 @@ const handleSliderMove = useCallback((clientX: number) => {
 
 
 
-    /*Header setting*/
-    return (
-        <>
-            {/* Base Styling */}
-            <style dangerouslySetInnerHTML={{__html: `
-                .premium-shadow { box-shadow: 0 10px 30px -10px rgba(44, 62, 80, 0.08); }
-                .glow-green { box-shadow: 0 10px 30px -5px rgba(46, 204, 113, 0.15); }
-                .glow-orange { box-shadow: 0 10px 30px -5px rgba(230, 126, 34, 0.15); }
-                ::-webkit-scrollbar { width: 8px; }
-                ::-webkit-scrollbar-track { background: #FAFAFA; }
-                ::-webkit-scrollbar-thumb { background: #2C3E50; border-radius: 4px; }
-                ::-webkit-scrollbar-thumb:hover { background: #2ECC71; }
-            `}} />
+/*Header setting*/
+return (
+    <>
+        {/* Base Styling */}
+        <style dangerouslySetInnerHTML={{__html: `
+            .premium-shadow { box-shadow: 0 10px 30px -10px rgba(44, 62, 80, 0.08); }
+            .glow-green { box-shadow: 0 10px 30px -5px rgba(46, 204, 113, 0.15); }
+            .glow-orange { box-shadow: 0 10px 30px -5px rgba(230, 126, 34, 0.15); }
+            ::-webkit-scrollbar { width: 8px; }
+            ::-webkit-scrollbar-track { background: #FAFAFA; }
+            ::-webkit-scrollbar-thumb { background: #2C3E50; border-radius: 4px; }
+            ::-webkit-scrollbar-thumb:hover { background: #2ECC71; }
+        `}} />
 
-            {/* Dark ResistFit Fixed Navbar - Moved OUTSIDE the wrapper so it cannot be trapped */}
-            <nav className="fixed top-0 left-0 right-0 w-full z-[9999] bg-[#2C3E50]/95 backdrop-blur-md text-white shadow-xl transition-all duration-300">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between h-16 sm:h-20">
-                        <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 bg-[#2ECC71] rounded-xl flex items-center justify-center shadow-md">
-                                <Dumbbell className="text-[#2C3E50]" size={20} strokeWidth={3} />
-                            </div>
-                            <div>
-                                <span className="text-xl sm:text-2xl font-black tracking-tight text-white">Resist<span className="text-[#2ECC71]">Fit</span></span>
-                                <span className="block text-[9px] text-[#2ECC71] tracking-widest uppercase font-bold">Anytime Anywhere</span>
-                            </div>
-                        </div>
-                        <div className="hidden md:flex items-center gap-8">
-                            <a href="#painpoints" className="text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">經紀煩惱</a>
-                            <a href="#concept" className="text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">隨時訓練</a>
-                            <a href="#demo" className="text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">3分鐘試玩</a>
-                            <a href="#transformation" className="text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">成果見證</a>
-                            <a href="#aicoach" className="text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">AI 飲食計算</a>
-                            <a href="#pricing" className="text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">方案價格</a>
+        {/* Dark ResistFit Fixed Navbar - Outside the main content flow to ensure click safety */}
+        <nav className="fixed top-0 left-0 right-0 w-full z-[9999] bg-[#2C3E50]/95 backdrop-blur-md text-white shadow-xl transition-all duration-300">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between h-16 sm:h-20">
+                    
+                    {/* Left Side: Brand Logo */}
+                    <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-[#2ECC71] rounded-xl flex items-center justify-center shadow-md">
+                            <Dumbbell className="text-[#2C3E50]" size={20} strokeWidth={3} />
                         </div>
                         <div>
-                            <a href="#pricing" className="px-5 py-2.5 bg-[#E67E22] hover:bg-orange-600 text-white font-bold rounded-xl transition shadow-lg text-sm flex items-center gap-2">
-                                <span>立即起步</span>
-                                <ArrowRight size={14} strokeWidth={3} />
-                            </a>
+                            <span className="text-xl sm:text-2xl font-black tracking-tight text-white">Resist<span className="text-[#2ECC71]">Fit</span></span>
+                            <span className="block text-[9px] text-[#2ECC71] tracking-widest uppercase font-bold">Anytime Anywhere</span>
                         </div>
                     </div>
+
+                    {/* Center: Scroll Navigation Links */}
+                    <div className="hidden md:flex items-center gap-8">
+                        <a href="#painpoints" className="text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">經紀煩惱</a>
+                        <a href="#concept" className="text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">隨時訓練</a>
+                        <a href="#premium-card-3" className="text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">3分鐘試玩</a>
+                        {/* FIX: Points to your precise slider ID section */}
+                        <a href="#transformationSec" className="text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">成果見證</a>
+                        <a href="#premium-card-4" className="text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">AI 飲食計算</a>
+                        <a href="#pricing" className="text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">方案價格</a>
+                    </div>
+
+                    {/* Right Side: Functional Actions Container (Keeps items safely grouped together) */}
+                    <div className="flex items-center gap-4 sm:gap-6">
+                        <button 
+                            onClick={() => {
+                                // SAFE STATE ROUTER: Checks which modal framework your file currently relies on
+                                if (typeof setLoginStep === 'function') setLoginStep('form');
+                                
+                                if (typeof setIsLoginModalOpen === 'function') {
+                                    setIsLoginModalOpen(true);
+                                } else if (typeof setModals === 'function') {
+                                    setModals(prev => ({ ...prev, login: true }));
+                                }
+                            }}
+                            className="text-sm font-medium text-slate-300 hover:text-white transition-colors py-2"
+                        >
+                            登入
+                        </button>
+
+                        <a href="#pricing" className="px-5 py-2.5 bg-[#E67E22] hover:bg-orange-600 text-white font-bold rounded-xl transition shadow-lg text-sm flex items-center gap-2">
+                            <span>立即起步</span>
+                            <ArrowRight size={14} strokeWidth={3} />
+                        </a>
+                    </div>
+
                 </div>
-            </nav>
+            </div>
+        </nav>
 
-            {/* Main Application Container - Now with top padding to account for the fixed header */}
-            <div className="min-h-screen bg-[#FAFAFA] text-[#2C3E50] font-sans antialiased overflow-x-hidden pt-16 sm:pt-20">
+        {/* Main Application Container - Now with top padding to account for the fixed header */}
+        <div className="min-h-screen bg-[#FAFAFA] text-[#2C3E50] font-sans antialiased overflow-x-hidden pt-16 sm:pt-20">
 
-                {/* DO NOT CHANGE ANYTHING BELOW THIS LINE. Your hero section continues here... */}
+            {/* DO NOT CHANGE ANYTHING BELOW THIS LINE. Your hero section continues here... */}
 
 
 
@@ -451,14 +498,101 @@ const handleSliderMove = useCallback((clientX: number) => {
                                             </p>
                                             
                                             <div className="pt-2 sm:pt-4 flex flex-wrap gap-3 items-center">
-                                                <button className="px-6 py-2.5 sm:px-8 sm:py-3.5 bg-white hover:bg-slate-100 text-slate-900 font-bold text-xs sm:text-sm rounded-full transition duration-200 active:scale-95 flex items-center gap-2 shadow-md">
-                                                    <Play size={14} fill="currentColor" />
+                                                {/* Primary Button */}
+                                                <button 
+                                                    onClick={(e) => {
+                                                        e.stopPropagation(); // Prevents manual slide navigation collision
+                                                        
+                                                        // Route 1: Premium Card 1 Target (Slide 4 Primary)
+                                                        if (slide.actionPrimary === "scrollToCard1" || slide.primaryBtn.includes("產品特性")) {
+                                                            const card1Section = document.getElementById("premium-card-1");
+                                                            if (card1Section) {
+                                                                card1Section.scrollIntoView({ behavior: "smooth" });
+                                                            } else {
+                                                                window.location.hash = "premium-card-1";
+                                                            }
+                                                        }
+                                                        // Route 2: Premium Card 3 Target (Slide 3 Primary)
+                                                        else if (slide.actionPrimary === "scrollToCard3") {
+                                                            const card3Section = document.getElementById("premium-card-3");
+                                                            if (card3Section) {
+                                                                card3Section.scrollIntoView({ behavior: "smooth" });
+                                                            } else {
+                                                                window.location.hash = "premium-card-3";
+                                                            }
+                                                        }
+                                                        // Route 3: Pricing Targets (Slide 1 & Slide 5)
+                                                        else if (slide.action === "scrollToPricing" || slide.primaryBtn.includes("立即訂閱") || slide.primaryBtn.includes("季度挑戰成功價")) {
+                                                            const pricingSection = document.getElementById("pricing");
+                                                            if (pricingSection) {
+                                                                pricingSection.scrollIntoView({ behavior: "smooth" });
+                                                            } else {
+                                                                window.location.hash = "pricing";
+                                                            }
+                                                        } 
+                                                        // Route 4: Premium Card 4 Target (Slide 2)
+                                                        else if (slide.action === "scrollToCard4" || slide.primaryBtn.includes("AI 專屬熱量估算")) {
+                                                            const card4Section = document.getElementById("premium-card-4");
+                                                            if (card4Section) {
+                                                                card4Section.scrollIntoView({ behavior: "smooth" });
+                                                            } else {
+                                                                window.location.hash = "premium-card-4";
+                                                            }
+                                                        }
+                                                    }}
+                                                    className={`px-6 py-2.5 sm:px-8 sm:py-3.5 font-bold text-xs sm:text-sm rounded-full transition duration-200 active:scale-95 flex items-center gap-2 shadow-md ${
+                                                        slide.customPrimaryBtnClass ? slide.customPrimaryBtnClass : "bg-white hover:bg-slate-100 text-slate-900"
+                                                    }`}
+                                                >
+                                                    {!slide.hidePlayIcon && <Play size={14} fill="currentColor" />}
                                                     {slide.primaryBtn}
                                                 </button>
-                                                <button className="px-6 py-2.5 sm:px-8 sm:py-3.5 bg-white/20 hover:bg-white/30 backdrop-blur-md text-white font-bold text-xs sm:text-sm rounded-full transition duration-200 active:scale-95 border border-white/10">
-                                                    {slide.secondaryBtn}
-                                                </button>
+                                                
+                                                {/* Secondary Button */}
+                                                {slide.secondaryBtn && (
+                                                    <button 
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            
+                                                            // Route 1: Pricing Text Fallbacks & actionSecondary Targets (Slide 3 & Slide 4 Secondary)
+                                                            if (slide.actionSecondary === "scrollToPricing" || slide.action === "scrollToPricing" || slide.secondaryBtn.includes("原價季度續約") || slide.secondaryBtn.includes("了解更多細節")) {
+                                                                const pricingSection = document.getElementById("pricing");
+                                                                if (pricingSection) {
+                                                                    pricingSection.scrollIntoView({ behavior: "smooth" });
+                                                                } else {
+                                                                    window.location.hash = "pricing";
+                                                                }
+                                                            }
+                                                            // Route 2: Premium Card 2 Target
+                                                            else if (slide.actionSecondary === "scrollToCard2") {
+                                                                const card2Section = document.getElementById("premium-card-2");
+                                                                if (card2Section) {
+                                                                    card2Section.scrollIntoView({ behavior: "smooth" });
+                                                                } else {
+                                                                    window.location.hash = "premium-card-2";
+                                                                }
+                                                            }
+                                                            // Route 3: Transformation section Target
+                                                            else if (slide.actionSecondary === "transformationSec") {
+                                                                const transformationSec = document.getElementById("transformationSec");
+                                                                if (transformationSec) {
+                                                                    transformationSec.scrollIntoView({ behavior: "smooth" });
+                                                                } else {
+                                                                    window.location.hash = "transformationSec";
+                                                                }
+                                                            }
+                                                        }}
+                                                        className={`px-6 py-2.5 sm:px-8 sm:py-3.5 font-bold text-xs sm:text-sm rounded-full transition duration-200 active:scale-95 flex items-center gap-2 border border-white/10 backdrop-blur-md shadow-md bg-white/20 hover:bg-white/30 text-white ${
+                                                            slide.customSecondaryBtnClass ? slide.customSecondaryBtnClass : ""
+                                                        }`}
+                                                    >
+                                                        {slide.secondaryBtn}
+                                                    </button>
+                                                )}
                                             </div>
+                                            
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -466,8 +600,10 @@ const handleSliderMove = useCallback((clientX: number) => {
                         })}
                     </div>
 
-                    {/* Bottom Synchronized Media Controller Subsystem */}
-                    <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-30 bg-white/80 dark:bg-black/40 backdrop-blur-xl px-5 py-2.5 rounded-full border border-slate-200/50 dark:border-white/15 flex items-center gap-5 shadow-lg">
+
+
+{/* Bottom Synchronized Media Controller Subsystem */}
+<div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-30 bg-white/80 dark:bg-black/40 backdrop-blur-xl px-5 py-2.5 rounded-full border border-slate-200/50 dark:border-white/15 flex items-center gap-5 shadow-lg">
                         <div className="flex items-center gap-2.5">
                             {slides.map((_, idx) => (
                                 <button
@@ -477,15 +613,19 @@ const handleSliderMove = useCallback((clientX: number) => {
                                         setCurrentSlide(idx);
                                     }}
                                     className={`h-1.5 transition-all duration-500 rounded-full ${
-                                        currentSlide === idx ? 'w-7 bg-slate-900 dark:bg-white' : 'w-1.5 bg-slate-400/50 dark:bg-white/30 hover:bg-slate-500'
+                                        currentSlide === idx 
+                                            ? 'w-7 bg-slate-900 dark:bg-white' 
+                                            : 'w-1.5 bg-slate-400/50 dark:bg-white/30 hover:bg-slate-500'
                                     }`}
                                     aria-label={`Slide target panel ${idx + 1}`}
                                 />
                             ))}
                         </div>
 
+                        {/* Middle Divider Line */}
                         <div className="w-[1px] h-3.5 bg-slate-300 dark:bg-white/20" />
 
+                        {/* Media Play/Pause Controls */}
                         <button 
                             onClick={(e) => {
                                 e.stopPropagation();
@@ -506,107 +646,12 @@ const handleSliderMove = useCallback((clientX: number) => {
 
 
 
-
-            {/* Hero Section */}
-            <section id="painpoints" className="relative py-12 lg:py-24 overflow-hidden bg-[#FAFAFA]">
-                <div className="absolute top-1/4 -left-1/4 w-96 h-96 bg-[#2ECC71]/5 rounded-full filter blur-[100px] pointer-events-none"></div>
-                <div className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-[#E67E22]/5 rounded-full filter blur-[100px] pointer-events-none"></div>
-
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                        <div className="lg:col-span-7 space-y-6 sm:space-y-8 z-10">
-                            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E8F5E9] border border-[#2ECC71]/20">
-                                <span className="w-2 h-2 rounded-full bg-[#E67E22] animate-pulse"></span>
-                                <span className="text-xs text-[#2C3E50] font-semibold">專為28-35歲+ 地產從業員設計</span>
-                            </div>
-                            
-                            <h1 className="text-4xl sm:text-6xl font-black leading-tight tracking-tight text-[#2C3E50]">
-                                生活<span className="underline decoration-[#E67E22] decoration-wavy decoration-2">冇時間運動</span>？<br/>
-                                開單忙、坐舖悶？
-                            </h1>
-                            
-                            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
-                                日日喺舖頭等客、Call客、企足一日，收工攰到根本去唔到Gym Room？<br/>
-                                你需要嘅唔係昂貴年卡，而係一套<span className="text-[#2ECC71] font-bold">放喺食晏、坐舖、碎片時間</span>就可以練，唔阻做嘢又有AI與真人PT雙重加持嘅彈力帶神級方案！
-                            </p>
-
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                                <div className="flex items-center gap-3 p-4 bg-[#E8F5E9] border border-[#2ECC71]/25 rounded-2xl">
-                                    <Briefcase className="text-[#2ECC71]" size={24} />
-                                    <div>
-                                        <h4 className="text-sm font-bold text-[#2C3E50]">隨時隨地</h4>
-                                        <p className="text-[11px] text-slate-500">10分鐘碎片時間救星</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-3 p-4 bg-[#FDF2E9] border border-[#E67E22]/25 rounded-2xl">
-                                    <Bot className="text-[#E67E22]" size={24} />
-                                    <div>
-                                        <h4 className="text-sm font-bold text-[#2C3E50]">AI 智能指導</h4>
-                                        <p className="text-[11px] text-slate-500">免下載，計Protein卡路里</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
-                                <a href="#demo" className="px-8 py-4 bg-[#E67E22] hover:bg-orange-600 text-white font-extrabold text-center rounded-2xl transition transform hover:-translate-y-1 shadow-lg flex items-center justify-center gap-3 glow-orange">
-                                    <PlayCircle size={20} />
-                                    <span>試玩3分鐘影片訓練</span>
-                                </a>
-                                <a href="#aicoach" className="px-8 py-4 bg-white hover:bg-slate-50 border-2 border-[#2C3E50] text-[#2C3E50] font-bold text-center rounded-2xl transition flex items-center justify-center gap-2">
-                                    <span>AI 專屬熱量估算</span>
-                                    <ArrowDown size={14} />
-                                </a>
-                            </div>
-                        </div>
-
-                        <div className="lg:col-span-5 relative">
-                            <div className="w-full h-[320px] sm:h-[450px] rounded-3xl overflow-hidden border border-slate-200 bg-white relative premium-shadow group">
-                                <div className="absolute inset-0 bg-cover bg-center" style={{backgroundImage: "url('https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1000&auto=format&fit=crop')", opacity: 0.85}}></div>
-                                
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#2C3E50]/90 via-[#2C3E50]/20 to-transparent flex flex-col justify-between p-6">
-                                    <div className="flex justify-between items-start">
-                                        <span className="px-3 py-1 bg-[#E67E22] text-[11px] font-black tracking-wider uppercase rounded text-white">ResistFit</span>
-                                        <span className="text-xs font-mono text-white bg-[#2C3E50] px-2 py-1 rounded border border-white/20 flex items-center">
-                                            <Circle className="text-red-500 w-2 h-2 mr-1.5 animate-pulse fill-red-500" /> LIVE DEMO
-                                        </span>
-                                    </div>
-
-                                    <div className="space-y-3">
-                                        <div className="w-16 h-16 rounded-full bg-[#2ECC71]/20 border-2 border-[#2ECC71] flex items-center justify-center mx-auto mb-4 animate-bounce">
-                                            <Zap className="text-[#2ECC71]" size={28} />
-                                        </div>
-                                        <div className="text-center text-white">
-                                            <p className="text-xs text-[#2ECC71] font-black tracking-widest uppercase">Anytime Anywhere</p>
-                                            <h3 className="text-xl font-bold text-white">「企足全日、久坐腰酸？」</h3>
-                                            <p className="text-xs text-white/80">專為舖頭辦公椅設計的拉伸彈力操</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="bg-white border border-slate-100 p-3 rounded-xl flex items-center justify-between shadow-lg">
-                                        <div className="flex items-center gap-2">
-                                            <img src="https://placehold.co/100x100/2ecc71/ffffff?text=PT" alt="PT" className="w-8 h-8 rounded-full border border-[#2ECC71]" />
-                                            <div>
-                                                <h5 className="text-xs font-bold text-[#2C3E50]">PT Gary (物理治療師資歷)</h5>
-                                                <p className="text-[10px] text-slate-500">「髖關節與胸椎訓練」</p>
-                                            </div>
-                                        </div>
-                                        <span className="text-[10px] text-[#2C3E50] font-bold bg-[#E8F5E9] px-2 py-0.5 rounded"> remarks (3)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-
-
 {/* Apple-Style 3-Column Reasons Section (Unified Row Fade-In) */}
 <section className="py-20 bg-[#F5F5F7] border-t border-slate-200/50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div id="painpoints"className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 apple-stagger-container">
                     
                     {/* Big Bold Section Title */}
-                    <div className="text-center max-w-3xl mx-auto mb-16 apple-fade-in opacity-0 translate-y-14 transition-all duration-[1000ms] ease-[cubic-bezier(0.25,1,0.5,1)]">
+                    <div className="text-center max-w-3xl mx-auto mb-16 apple-stagger-item transition-all duration-[800ms] ease-out opacity-0 translate-y-14">
                         <h2 className="text-4xl sm:text-5xl font-black text-[#2C3E50] tracking-tight leading-tight">
                         去 Gym Room 到底有幾麻煩？
                         </h2>
@@ -614,7 +659,7 @@ const handleSliderMove = useCallback((clientX: number) => {
                     </div>
 
                     {/* 3 Columns Grid Content Fades Up Completely as One Unit */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 apple-fade-in opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)]">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 apple-stagger-item transition-all duration-[800ms] ease-out opacity-0 translate-y-14">
                         
                         {/* Column 1 */}
                         <div className="bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between min-h-[480px] pt-10 px-8 border border-slate-100 text-center group">
@@ -693,7 +738,7 @@ const handleSliderMove = useCallback((clientX: number) => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Title */}
-        <div className="text-center max-w-2xl mx-auto mb-16 apple-fade-in opacity-0 translate-y-14 transition-all duration-[1000ms] ease-[cubic-bezier(0.25,1,0.5,1)]">
+        <div className="text-center max-w-2xl mx-auto mb-16 apple-stagger-item transition-all duration-[800ms] ease-out opacity-0 translate-y-14">
             <h2 className="text-3xl font-black text-[#2C3E50] tracking-tight sm:text-5xl">
                 專為忙碌經紀設計的核心配置
             </h2>
@@ -706,7 +751,7 @@ const handleSliderMove = useCallback((clientX: number) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 apple-stagger-container">
             
             {/* Card 1 - Symmetrical Footprint */}
-            <div className="apple-stagger-item opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between min-h-[600px] lg:min-h-[640px] border border-slate-100 group">
+            <div id="premium-card-1"className="apple-stagger-item opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between min-h-[600px] lg:min-h-[640px] border border-slate-100 group">
                 <div className="p-10 sm:p-12 flex flex-col items-start text-left">
                     <span className="text-[11px] font-black tracking-widest text-[#2ECC71] uppercase block mb-2">全新產品</span>
                     <h3 className="text-2xl sm:text-3xl font-black text-[#2C3E50] tracking-tight mb-3">智能感應彈力帶</h3>
@@ -725,7 +770,7 @@ const handleSliderMove = useCallback((clientX: number) => {
             </div>
 
             {/* Card 2 - Symmetrical Footprint */}
-            <div className="apple-stagger-item opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between min-h-[600px] lg:min-h-[640px] border border-slate-100 group">
+            <div id="premium-card-2"className="apple-stagger-item opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between min-h-[600px] lg:min-h-[640px] border border-slate-100 group">
                 <div className="p-10 sm:p-12 flex flex-col items-start text-left">
                     <span className="text-[11px] font-black tracking-widest text-slate-400 uppercase block mb-2">特設功能</span>
                     <h3 className="text-2xl sm:text-3xl font-black text-[#2C3E50] tracking-tight mb-3">1對1 AI 智能教練</h3>
@@ -744,7 +789,7 @@ const handleSliderMove = useCallback((clientX: number) => {
             </div>
 
             {/* Card 3 - Symmetrical Footprint Full-Container Video Player */}
-            <div className="apple-stagger-item opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] bg-[#2C3E50] rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all min-h-[600px] lg:min-h-[640px] border border-slate-100 group relative">
+            <div id="premium-card-3"className="apple-stagger-item opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] bg-[#2C3E50] rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all min-h-[600px] lg:min-h-[640px] border border-slate-100 group relative">
                 
                 {/* STATE 1: FULL-SIZE COVER VIEW */}
                 {videoState === 'cover' && (
@@ -846,7 +891,7 @@ const handleSliderMove = useCallback((clientX: number) => {
             </div>
 
             {/* Card 4 - Symmetrical Footprint Interactive AI Coaching Module */}
-            <div className="apple-stagger-item opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between min-h-[600px] lg:min-h-[640px] border border-slate-100 group relative">
+            <div id="premium-card-4"className="apple-stagger-item opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between min-h-[600px] lg:min-h-[640px] border border-slate-100 group relative">
                 
                 {/* Background Image Layers */}
                 <div 
@@ -963,98 +1008,22 @@ const handleSliderMove = useCallback((clientX: number) => {
 
 
 
-
-        {/* Transformation Slider Section */}
-<section id="transformation" className="py-16 bg-white border-t border-slate-200">
-  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="text-center space-y-3 mb-12">
-      <span className="px-3 py-1 bg-[#FDF2E9] text-[#E67E22] text-xs font-black tracking-widest uppercase rounded">
-        PROVEN RESULTS
-      </span>
-      <h2 className="text-3xl sm:text-4xl font-extrabold text-[#2C3E50]">看看同行的蛻變成果</h2>
-      <p className="text-sm text-slate-500 max-w-lg mx-auto">
-        真實學員:31歲地產經紀 Anson 利用行街、坐舖時間配合彈力帶,12週減脂增肌。
-      </p>
-    </div>
-
-    {/* Interactive Container */}
-    <div
-      ref={sliderContainerRef}
-      className="relative w-full aspect-[4/3] max-w-2xl mx-auto rounded-3xl overflow-hidden border-4 border-slate-200 shadow-xl select-none cursor-ew-resize"
-      onMouseDown={(e) => {
-        setIsDragging(true);
-        handleSliderMove(e.clientX);
-      }}
-      onTouchStart={(e) => {
-        setIsDragging(true);
-        if (e.touches[0]) handleSliderMove(e.touches[0].clientX);
-      }}
-    >
-      {/* Background Layer: After Image */}
-      <div className="absolute inset-0 bg-slate-200">
-        <img 
-          src="/image/0101_After.png" 
-          className="w-full h-full object-cover" 
-          alt="After" 
-          draggable={false}
-        />
-        <div className="absolute bottom-4 right-4 bg-[#2ECC71] text-white font-black text-xs px-3 py-1.5 rounded-lg shadow-lg">
-          12週後:體脂 13% 鋼鐵腹肌
-        </div>
-      </div>
-
-      {/* Foreground Layer: Before Image Masked */}
-      <div 
-        className="absolute inset-y-0 left-0 overflow-hidden transition-all duration-75" 
-        style={{ width: `${sliderPos}%` }}
-      >
-        <div 
-          className="absolute inset-y-0 left-0 h-full"
-          style={{ width: sliderContainerRef.current ? sliderContainerRef.current.getBoundingClientRect().width : '600px' }}
-        >
-          <img 
-            src="/image/0101_Before.png" 
-            className="absolute inset-0 w-full h-full object-cover" 
-            alt="Before" 
-            draggable={false}
-          />
-          <div className="absolute bottom-4 left-4 bg-[#E67E22] text-white font-black text-xs px-3 py-1.5 rounded-lg shadow-lg whitespace-nowrap">
-            Before:久坐肚腩 / 體脂 26% / 腰酸背痛
-          </div>
-        </div>
-      </div>
-
-      {/* Slider Control Divider Bar */}
-      <div 
-        className="absolute inset-y-0 w-1 bg-[#E67E22] flex items-center justify-center pointer-events-none"
-        style={{ left: `${sliderPos}%` }}
-      >
-        <div className="w-10 h-10 bg-[#E67E22] text-white rounded-full flex items-center justify-center shadow-2xl border-2 border-white transform -translate-x-[2px]">
-          <MoveHorizontal size={16} />
-        </div>
-      </div>
-    </div>
-
-    <p className="text-center text-xs text-slate-500 mt-4 flex justify-center items-center gap-1">
-      <Info size={14} className="text-[#2ECC71]"/> 
-      左右拖拽橙色滑桿,實時對比身材前後改變。
-    </p>
-  </div>
-</section>
-
-
-
-            {/* Pricing */}
-            <section id="pricing" className="py-16 bg-white border-t border-slate-200">
+ {/* Pricing Section with Apple Scroll Interactions */}
+ <section id="pricing" className="py-16 bg-white border-t border-slate-200 overflow-hidden">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center space-y-4 mb-16">
+                    
+                    {/* 1. Header Text: Standard Apple Fade-in (Moves as one unit) */}
+                    <div className="text-center space-y-4 mb-16 apple-fade-in transition-all duration-[1000ms] ease-out opacity-0 translate-y-14">
                         <span className="px-3 py-1 bg-[#E8F5E9] text-[#2ECC71] text-xs font-black tracking-widest uppercase rounded">TRANSPARENT PRICING</span>
                         <h2 className="text-3xl sm:text-5xl font-black text-[#2C3E50]">專屬經紀健身方案</h2>
                         <p className="text-sm text-slate-500 max-w-xl mx-auto">無隱藏收費，適合新手、中高階及想善用空檔的經紀精英。兩大計劃均支援 AI 指南！</p>
                     </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                        <div className="bg-[#FAFAFA] rounded-3xl border border-slate-200 p-8 flex flex-col justify-between space-y-8 relative hover:border-[#2ECC71]/50 transition duration-300 shadow-md">
+                    {/* 2. Grid Container: Marked as a Stagger Container */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto apple-stagger-container">
+                        
+                        {/* Pricing Card 1: Stagger Item (Appears First) */}
+                        <div className="apple-stagger-item transition-all duration-[800ms] ease-out opacity-0 translate-y-14 bg-[#FAFAFA] rounded-3xl border border-slate-200 p-8 flex flex-col justify-between space-y-8 relative hover:border-[#2ECC71]/50 transition duration-300 shadow-md">
                             <div className="space-y-6">
                                 <div className="flex justify-between items-start">
                                     <div>
@@ -1099,7 +1068,8 @@ const handleSliderMove = useCallback((clientX: number) => {
                             </button>
                         </div>
 
-                        <div className="bg-white rounded-3xl border-4 border-[#E67E22] p-8 flex flex-col justify-between space-y-8 relative shadow-2xl scale-100 lg:scale-105 transition glow-orange">
+                        {/* Pricing Card 2: Stagger Item (Appears Second with 180ms delay) */}
+                        <div className="apple-stagger-item transition-all duration-[800ms] ease-out opacity-0 translate-y-14 bg-white rounded-3xl border-4 border-[#E67E22] p-8 flex flex-col justify-between space-y-8 relative shadow-2xl scale-100 lg:scale-105 transition glow-orange">
                             <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#E67E22] text-white font-black text-xs px-4 py-1.5 rounded-full tracking-wider uppercase shadow-md whitespace-nowrap">
                                 🏆 最多經紀強烈推薦
                             </div>
@@ -1147,20 +1117,111 @@ const handleSliderMove = useCallback((clientX: number) => {
                                 立即訂閱 Premium 方案
                             </button>
                         </div>
+
                     </div>
                 </div>
             </section>
 
-            {/* PT Remarks Section */}
-            <section className="py-16 bg-[#FAFAFA] relative border-t border-slate-200">
-                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center space-y-3 mb-12">
+
+
+
+
+ {/* Transformation Slider Section with Apple Scroll Interactions */}
+ <section id="transformationSec" className="py-16 bg-white border-t border-slate-200 overflow-hidden">
+          <div id="premium-card-4" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 apple-stagger-container">
+            
+            {/* 1. Header Block (Stagger Item #1) */}
+            <div className="text-center space-y-3 mb-12 apple-stagger-item transition-all duration-[800ms] ease-out opacity-0 translate-y-14">
+              <span className="px-3 py-1 bg-[#FDF2E9] text-[#E67E22] text-xs font-black tracking-widest uppercase rounded">
+                PROVEN RESULTS
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#2C3E50]">看看同行的蛻變成果</h2>
+              <p className="text-sm text-slate-500 max-w-lg mx-auto">
+                真實學員:31歲地產經紀 Anson 利用行街、坐舖時間配合彈力帶,12週減脂增肌。
+              </p>
+            </div>
+
+            {/* 2. Interactive Before/After Module (Stagger Item #2) */}
+            <div
+              ref={sliderContainerRef}
+              className="apple-stagger-item transition-all duration-[800ms] ease-out opacity-0 translate-y-14 relative w-full aspect-[4/3] max-w-2xl mx-auto rounded-3xl overflow-hidden border-4 border-slate-200 shadow-xl select-none cursor-ew-resize"
+              onMouseDown={(e) => {
+                setIsDragging(true);
+                handleSliderMove(e.clientX);
+              }}
+              onTouchStart={(e) => {
+                setIsDragging(true);
+                if (e.touches[0]) handleSliderMove(e.touches[0].clientX);
+              }}
+            >
+              {/* Background Layer: After Image */}
+              <div className="absolute inset-0 bg-slate-200">
+                <img 
+                  src="/image/0101_After.png" 
+                  className="w-full h-full object-cover" 
+                  alt="After" 
+                  draggable={false}
+                />
+                <div className="absolute bottom-4 right-4 bg-[#2ECC71] text-white font-black text-xs px-3 py-1.5 rounded-lg shadow-lg">
+                  After: 12週後:體脂 13% 鋼鐵腹肌
+                </div>
+              </div>
+
+              {/* Foreground Layer: Before Image Masked */}
+              <div 
+                className="absolute inset-y-0 left-0 overflow-hidden transition-all duration-75" 
+                style={{ width: `${sliderPos}%` }}
+              >
+                <div 
+                  className="absolute inset-y-0 left-0 h-full"
+                  style={{ width: sliderContainerRef.current ? sliderContainerRef.current.getBoundingClientRect().width : '600px' }}
+                >
+                  <img 
+                    src="/image/0101_Before.png" 
+                    className="absolute inset-0 w-full h-full object-cover" 
+                    alt="Before" 
+                    draggable={false}
+                  />
+                  <div className="absolute bottom-4 left-4 bg-[#E67E22] text-white font-black text-xs px-3 py-1.5 rounded-lg shadow-lg whitespace-nowrap">
+                    Before: 久坐肚腩 / 體脂 26% / 腰酸背痛
+                  </div>
+                </div>
+              </div>
+
+              {/* Slider Control Divider Bar */}
+              <div 
+                className="absolute inset-y-0 w-1 bg-[#E67E22] flex items-center justify-center pointer-events-none"
+                style={{ left: `${sliderPos}%` }}
+              >
+                <div className="w-10 h-10 bg-[#E67E22] text-white rounded-full flex items-center justify-center shadow-2xl border-2 border-white transform -translate-x-[2px]">
+                  <MoveHorizontal size={16} />
+                </div>
+              </div>
+            </div>
+
+            {/* 3. Interactive Hint Text (Stagger Item #3) */}
+            <p className="apple-stagger-item transition-all duration-[800ms] ease-out opacity-0 translate-y-14 text-center text-xs text-slate-500 mt-4 flex justify-center items-center gap-1">
+              <Info size={14} className="text-[#2ECC71]"/> 
+              左右拖拽橙色滑桿,實時對比身材前後改變。
+            </p>
+          </div>
+        </section>
+
+
+
+{/* PT Remarks Section with Apple Scroll Interactions */}
+<section className="py-16 bg-[#FAFAFA] relative border-t border-slate-200 overflow-hidden">
+                <div id="concept"className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 apple-stagger-container">
+                    
+                    {/* 1. Header Block (Stagger Item #1) */}
+                    <div className="text-center space-y-3 mb-12 apple-stagger-item transition-all duration-[800ms] ease-out opacity-0 translate-y-14">
                         <span className="px-3 py-1 bg-slate-200 text-[#2C3E50] text-xs font-bold rounded">1:1 Seamless Handover</span>
                         <h2 className="text-3xl font-black text-[#2C3E50]">業界首創：真人 PT 接力監督系統</h2>
                         <p className="text-sm text-slate-500 max-w-lg mx-auto">每堂課教練都會詳細記錄你的細節進度，讓下一堂的跟進教練精準上手。</p>
                     </div>
 
-                    <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-6 shadow-md">
+                    {/* 2. Main Handover Log Card (Stagger Item #2) */}
+                    <div className="apple-stagger-item transition-all duration-[800ms] ease-out opacity-0 translate-y-14 bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-6 shadow-md">
                         <div className="flex items-center justify-between border-b border-slate-100 pb-4">
                             <div className="flex items-center gap-3">
                                 <span className="w-3 h-3 rounded-full bg-[#E67E22] animate-pulse"></span>
@@ -1170,6 +1231,7 @@ const handleSliderMove = useCallback((clientX: number) => {
                         </div>
 
                         <div className="space-y-6 relative before:absolute before:left-6 before:top-2 before:bottom-2 before:w-0.5 before:bg-[#2C3E50]/20">
+                            {/* PT Log entry A */}
                             <div className="flex items-start gap-4 relative">
                                 <img src="https://placehold.co/100x100/2ecc71/ffffff?text=PT1" alt="PT A" className="w-12 h-12 rounded-full border-2 border-[#2ECC71] z-10 bg-white" />
                                 <div className="bg-[#FDF2E9] p-4 rounded-xl border border-[#E67E22]/20 flex-1 space-y-2">
@@ -1186,6 +1248,7 @@ const handleSliderMove = useCallback((clientX: number) => {
                                 </div>
                             </div>
 
+                            {/* PT Log entry B */}
                             <div className="flex items-start gap-4 relative">
                                 <img src="https://placehold.co/100x100/e67e22/ffffff?text=PT2" alt="PT B" className="w-12 h-12 rounded-full border-2 border-[#E67E22] z-10 bg-white" />
                                 <div className="bg-[#FAFAFA] p-4 rounded-xl border border-slate-200 flex-1 space-y-2">
@@ -1200,94 +1263,143 @@ const handleSliderMove = useCallback((clientX: number) => {
                             </div>
                         </div>
                     </div>
+
                 </div>
             </section>
 
-            {/* Rewards */}
-            <section id="rewards" className="py-16 bg-white border-t border-slate-200">
-                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center space-y-4 mb-12">
-                        <span className="px-3 py-1 bg-[#2ECC71]/10 text-[#2ECC71] text-xs font-black tracking-widest uppercase rounded">GAMIFICATION REWARDS</span>
-                        <h2 className="text-3xl sm:text-4xl font-black text-[#2C3E50]">經紀專屬：動態激勵成就機制</h2>
-                        <p className="text-sm text-slate-500 max-w-lg mx-auto">做地產講求開單激勵，健身同樣需要回報！我們為你準備了最豐厚的打卡福利：</p>
-                    </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div className="bg-[#FAFAFA] rounded-3xl border border-slate-200 p-6 sm:p-8 space-y-6 relative overflow-hidden group premium-shadow">
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-[#2ECC71]/5 rounded-full filter blur-2xl group-hover:bg-[#2ECC71]/10 transition"></div>
-                            
-                            <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 rounded-2xl bg-[#E8F5E9] flex items-center justify-center text-[#2ECC71] text-2xl">
-                                    <CalendarCheck size={24} />
-                                </div>
-                                <div>
-                                    <span className="text-xs font-bold text-[#2ECC71] uppercase">連續 21 日打卡挑戰</span>
-                                    <h3 className="text-xl font-bold text-[#2C3E50]">送：進階版金屬扣抗阻彈力帶</h3>
-                                </div>
-                            </div>
 
-                            <p className="text-sm text-slate-600">
-                                經紀工作生活繁忙，連續打卡 21 天，我們即刻免費速遞你一套價值 HK$299 嘅專業五階金屬扣彈力帶，幫你升級訓練！
-                            </p>
 
-                            <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-inner space-y-3">
-                                <div className="flex justify-between text-xs font-bold text-slate-500">
-                                    <span>你的打卡進度 (模擬)</span>
-                                    <span className="text-[#2ECC71]"><strong>{streakDays.length + 8}</strong> / 21 天</span>
-                                </div>
-                                <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
-                                    <div className="bg-[#2ECC71] h-full transition-all duration-500" style={{width: `${((streakDays.length + 8) / 21) * 100}%`}}></div>
-                                </div>
-                                <div className="grid grid-cols-7 gap-2 pt-2">
-                                    {[1, 2, 3, 4, 5, 6, 7].map(day => (
-                                        <div 
-                                            key={day} 
-                                            onClick={() => toggleStreak(day)}
-                                            className={`aspect-square rounded flex items-center justify-center text-xs font-bold cursor-pointer transition ${
-                                                streakDays.includes(day) 
-                                                ? 'bg-[#E8F5E9] border border-[#2ECC71] text-[#2ECC71] hover:bg-[#E8F5E9]/60' 
-                                                : 'bg-slate-50 border border-slate-200 text-slate-400 hover:border-[#2ECC71] hover:text-[#2ECC71]'
-                                            }`}
-                                        >
-                                            {streakDays.includes(day) ? <Check size={14} strokeWidth={3} /> : day}
+
+
+{/* --- LOGIN MODAL COMPONENT --- */}
+{isLoginModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm">
+                    {/* Modal Card */}
+                    <div className="bg-white rounded-[24px] w-full max-w-md overflow-hidden shadow-2xl relative animate-in fade-in zoom-in duration-200">
+                        
+                        {/* Close Button Top Right */}
+                        <button 
+                            onClick={() => setIsLoginModalOpen(false)}
+                            className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-2 rounded-full hover:bg-slate-100 transition-colors"
+                        >
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+
+                        <div className="p-8">
+                            {loginStep === 'form' ? (
+                                /* --- VIEW 1: LOGIN FORM --- */
+                                <div className="space-y-6">
+                                    <div className="text-center">
+                                        <div className="w-14 h-14 bg-[#E67E22]/10 text-[#E67E22] rounded-full flex items-center justify-center mx-auto mb-4">
+                                            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                            </svg>
                                         </div>
-                                    ))}
-                                </div>
-                                <span className="block text-[10px] text-slate-400 text-center">點擊上方小方格，模擬今天完成碎片訓練打卡</span>
-                            </div>
-                        </div>
+                                        <h3 className="text-2xl font-bold text-slate-900">會員登入</h3>
+                                        <p className="text-slate-500 text-sm mt-1">歡迎回來 ResistFit</p>
+                                    </div>
 
-                        <div className="bg-[#FAFAFA] rounded-3xl border border-slate-200 p-6 sm:p-8 space-y-6 relative overflow-hidden group premium-shadow">
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-[#E67E22]/5 rounded-full filter blur-2xl group-hover:bg-[#E67E22]/10 transition"></div>
+                                    <div className="space-y-5">
+                                        <div>
+                                            <label className="block text-sm font-bold text-slate-700 mb-1.5">用戶名稱 / 電郵</label>
+                                            <input 
+                                                type="text" 
+                                                placeholder="例：user@example.com" 
+                                                className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#E67E22] focus:border-transparent transition-all text-slate-900 bg-slate-50 focus:bg-white" 
+                                            />
+                                        </div>
+                                        <div>
+                                            <div className="flex justify-between items-center mb-1.5">
+                                                <label className="block text-sm font-bold text-slate-700">密碼</label>
+                                                <button className="text-xs font-semibold text-[#E67E22] hover:underline">忘記密碼？</button>
+                                            </div>
+                                            <input 
+                                                type="password" 
+                                                placeholder="請輸入密碼" 
+                                                className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#E67E22] focus:border-transparent transition-all text-slate-900 bg-slate-50 focus:bg-white" 
+                                            />
+                                        </div>
+                                    </div>
 
-                            <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 rounded-2xl bg-[#FDF2E9] flex items-center justify-center text-[#E67E22] text-2xl">
-                                    <Trophy size={24} />
+                                    <button 
+                                        onClick={() => setLoginStep('progress')} 
+                                        className="w-full py-4 bg-[#E67E22] hover:bg-[#D35400] text-white font-bold rounded-xl transition-all active:scale-[0.98] shadow-lg shadow-orange-500/20 mt-2"
+                                    >
+                                        登入
+                                    </button>
                                 </div>
-                                <div>
-                                    <span className="text-xs font-bold text-[#E67E22] uppercase">3個月（Quarterly）大挑戰</span>
-                                    <h3 className="text-xl font-bold text-[#2C3E50]">續約 75 折起超值優惠</h3>
-                                </div>
-                            </div>
+                            ) : (
+                                /* --- VIEW 2: GAMIFICATION PROGRESS TRACKER --- */
+                                <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                                    <div className="text-center">
+                                        <h3 className="text-2xl font-bold text-slate-900 mb-2">登入成功！</h3>
+                                        <p className="text-slate-500 text-sm">這是您的專屬打卡進度，繼續保持：</p>
+                                    </div>
 
-                            <p className="text-sm text-slate-600">
-                                每季只要達到我們所設定的體脂率 / 肌肉增加標準（由 1:1 PT 通過每月遙距評估確認），下個季度的續約即自動獲取「尊爵經紀 75 折續約優惠價」，最少省去上千元！
-                            </p>
+                                    {/* Reward Progress Card Wrapper */}
+                                    <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm space-y-4">
+                                        <div className="flex justify-between items-end">
+                                            <span className="text-sm font-bold text-slate-700">你的打卡進度 (模擬)</span>
+                                            <span className="text-sm font-bold text-[#2ECC71]">
+                                                <strong>{streakDays.length + 8}</strong> / 21 天
+                                            </span>
+                                        </div>
+                                        
+                                        {/* Progress Tracking Bar */}
+                                        <div className="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                                            <div 
+                                                className="bg-[#2ECC71] h-full transition-all duration-500 rounded-full" 
+                                                style={{ width: `${((streakDays.length + 8) / 21) * 100}%` }}
+                                            ></div>
+                                        </div>
 
-                            <div className="bg-[#FDF2E9] p-5 rounded-xl border border-[#E67E22]/10 flex justify-between items-center shadow-inner">
-                                <div>
-                                    <h5 className="text-xs font-bold text-slate-500">原價季度續約：</h5>
-                                    <span className="text-lg font-bold text-slate-400 line-through">HK$2,064</span>
+                                        {/* Interactive Grid Items */}
+                                        <div className="grid grid-cols-7 gap-2 pt-2">
+                                            {[1, 2, 3, 4, 5, 6, 7].map((day) => (
+                                                <div 
+                                                    key={day} 
+                                                    onClick={() => toggleStreak(day)}
+                                                    className={`aspect-square rounded flex items-center justify-center text-xs font-bold cursor-pointer transition select-none ${
+                                                        streakDays.includes(day) 
+                                                            ? 'bg-[#E8F5E9] border border-[#2ECC71] text-[#2ECC71] hover:bg-[#E8F5E9]/60' 
+                                                            : 'bg-slate-50 border border-slate-200 text-slate-400 hover:border-[#2ECC71] hover:text-[#2ECC71]'
+                                                    }`}
+                                                >
+                                                    {streakDays.includes(day) ? (
+                                                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}>
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                                        </svg>
+                                                    ) : (
+                                                        day
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                        
+                                        <span className="block text-[10px] text-slate-400 text-center mt-2">
+                                            點擊上方小方格，模擬今天完成碎片訓練打卡
+                                        </span>
+                                    </div>
+
+                                    {/* Action Button */}
+                                    <button 
+                                        onClick={() => setIsLoginModalOpen(false)}
+                                        className="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl transition-all active:scale-[0.98]"
+                                    >
+                                        關閉視窗
+                                    </button>
                                 </div>
-                                <div className="text-right">
-                                    <h5 className="text-xs font-bold text-[#E67E22]">季度挑戰成功價：</h5>
-                                    <span className="text-2xl font-black text-[#E67E22]">HK$1,548</span>
-                                </div>
-                            </div>
+                            )}
                         </div>
                     </div>
                 </div>
-            </section>
+            )}
+
+
+
 
             {/* Modals */}
             {modals.checkout && (
