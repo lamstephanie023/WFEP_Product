@@ -331,18 +331,26 @@ const handleSliderMove = useCallback((clientX: number) => {
         };
 
         try {
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
+            console.log("Gemini API test");
+            setAiResult(prev => ({
+                ...prev,
+                loading: false,
+                text: `【AI Coach 離線版備用方案】\n\n📌 經紀專屬10分鐘分行彈力帶菜單：\n\n1. 椅子坐姿划船 (拉背) - 15次 x 3組 (舒緩久坐曲背)\n2. 踩彈力帶站姿推肩 - 12次 x 3組 (改善企太久無力)\n\n💡 經紀貼心提示：\n- 每次 Call 客或聽落單時，可將彈力帶踩於腳底，手抓兩端保持張力，進行低阻力拉伸。\n- 連續企 1 個鐘記得做 30 秒髖關節轉動。`
+            }));
 
-            if (!response.ok) throw new Error("API Error");
 
-            const result = await response.json();
-            const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+            // const response = await fetch(apiUrl, {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(payload)
+            // });
 
-            setAiResult(prev => ({ ...prev, loading: false, text: text || '生成失敗，請重試。' }));
+            // if (!response.ok) throw new Error("API Error");
+
+            // const result = await response.json();
+            // const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+            // setAiResult(prev => ({ ...prev, loading: false, text: text || '生成失敗，請重試。' }));
         } catch (error) {
             console.error("Gemini API Error", error);
             // Fallback
@@ -734,10 +742,11 @@ return (
 
 
 {/* Apple-Style 2x2 Premium Grid Section (Staggered Fade-In) */}
-<section className="py-20 bg-[#F5F5F7]">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section className="py-20 bg-[#F5F5F7] overflow-hidden">
+    {/* FIX: Added 'apple-stagger-container' here so the scroll engine triggers everything inside */}
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 apple-stagger-container">
         
-        {/* Section Title */}
+        {/* Section Title (Will now gracefully glide up onto the screen) */}
         <div className="text-center max-w-2xl mx-auto mb-16 apple-stagger-item transition-all duration-[800ms] ease-out opacity-0 translate-y-14">
             <h2 className="text-3xl font-black text-[#2C3E50] tracking-tight sm:text-5xl">
                 專為忙碌經紀設計的核心配置
