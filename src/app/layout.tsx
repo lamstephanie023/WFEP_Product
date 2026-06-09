@@ -39,7 +39,7 @@ export default function RootLayout({
             <div className="flex min-h-screen flex-col">
               {/* WFEP Header was removed from here so only ResistFit shows up */}
               <main className="flex-1">{children}</main>
-              <Footer />
+              {/* <Footer /> */}
             </div>
             <CartDrawer />
             <CookieBanner />

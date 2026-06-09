@@ -54,7 +54,7 @@ const slides = [
     {
         category: "碎片時間救星",
         title: "生活冇時間運動？",
-        desc: "開單忙、坐舖悶？收工攰到根本去唔到Gym Room？食晏、坐舖、碎片時間就可以練，唔阻做嘢又有AI與真人雙重加持嘅彈力帶神級方案！",
+        desc: "開單忙、坐舖悶？食晏、坐舖、碎片時間就可以練，唔阻做嘢又有AI與真人雙重加持嘅彈力帶神級方案！",
         primaryBtn: "AI 專屬熱量估算",
         secondaryBtn: "", // Left empty to remove the button entirely
         img: "/image/demo-002.png", // Keep your existing image file path here
@@ -65,7 +65,7 @@ const slides = [
     {
         category: "專為鋪頭辦公椅設計的拉伸彈力操",
         title: "企足全日、久坐腰酸？",
-        desc: "追蹤尖端動態姿勢偵測技術如何與現代碎片化訓練結合，徹底改變久坐族群與經紀人士的腰椎健康命運。",
+        desc: "高端動態姿勢偵測技術×現代碎片時間化訓練，全面照顧久坐族群與地產經紀的腰椎健康。",
         primaryBtn: "試玩3分鐘訓練",
         secondaryBtn: "了解更多細節",
         img: "/image/demo-003.png", // Keep your existing image file path here
@@ -77,7 +77,7 @@ const slides = [
     {
         category: "極簡美學與極致工藝的結合", // Keep your original text if different
         title: "精心打造的專屬配件",       // Keep your original text if different
-        desc: "航天級鋁合金扣具與高密度雙色編織彈力帶，不僅是健身工具，更是襯托專業形象的隨身精品。", // Keep original text
+        desc: "高密度雙色編織彈力帶，附有精緻鋁合金扣，是你的隨身攜帶的健身工具。", // Keep original text
         primaryBtn: "產品特性",
         secondaryBtn: "了解更多細節",
         img: "/image/demo-002.png", // Keep your existing image file path here
@@ -89,8 +89,8 @@ const slides = [
     // --- NEW SLIDE 5 ADDED HERE ---
     {
         category: "3個月 (QUARTERLY) 大挑戰",
-        title: "續約 75 折起超值優惠",
-        desc: "每季只要達到我們所設定的體脂率 / 肌肉增加標準 (由 1:1 PT 通過每月遙距評估確認)，下個季度的續約即自動獲取「尊爵經紀 75 折續約優惠價」，最少節省上千元！",
+        title: "低至75折！續約優惠",
+        desc: "3個月內完成健身目標（減體脂率、增加肌肉率），下季度續約可獲取低至75折的續約優惠。",
         primaryBtn: "季度挑戰成功價：HK$1,548",
         secondaryBtn: "原價季度續約：HK$2,064",
         img: "/image/demo-003.png", // Make sure to match your actual image file name
@@ -402,16 +402,30 @@ return (
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16 sm:h-20">
                     
-                    {/* Left Side: Brand Logo */}
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-[#2ECC71] rounded-xl flex items-center justify-center shadow-md">
-                            <Dumbbell className="text-[#2C3E50]" size={20} strokeWidth={3} />
+                   {/* Left Side: Brand Logo */}
+                    <a href="#" className="flex items-center gap-3 group focus:outline-none">
+                        
+                        {/* Logo Image Box */}
+                        <div className="w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center bg-transparent transition-transform duration-200 group-hover:scale-105">
+                            <img 
+                                src="/image/GO-logo.png" // <-- 1. EDIT THIS PATH TO YOUR NEW PNG FILE
+                                alt="ResistFit Logo" 
+                                className="w-full h-full object-contain"
+                            />
                         </div>
-                        <div>
-                            <span className="text-xl sm:text-2xl font-black tracking-tight text-white">Resist<span className="text-[#2ECC71]">Fit</span></span>
-                            <span className="block text-[9px] text-[#2ECC71] tracking-widest uppercase font-bold">Anytime Anywhere</span>
+                        
+                        {/* Brand Text Block */}
+                        {/* 2. NOTE: If your new PNG image already includes the text "ResistFit", you can completely delete or comment out this <div> below! */}
+                        <div className="flex flex-col">
+                            <span className="text-xl sm:text-2xl font-black tracking-tight text-white transition-colors group-hover:text-slate-200">
+                                Resist<span className="text-[#2ECC71]">Fit</span>
+                            </span>
+                            <span className="block text-[9px] text-[#2ECC71] tracking-widest uppercase font-bold">
+                                Anytime Anywhere
+                            </span>
                         </div>
-                    </div>
+
+                    </a>
 
                     {/* Center: Scroll Navigation Links */}
                     <div className="hidden md:flex items-center gap-8">
@@ -693,7 +707,7 @@ return (
                                 <h3 className="text-xl sm:text-2xl font-bold text-[#2C3E50] tracking-tight leading-snug max-w-[260px] mb-3">
                                 放工時間迫爆
                                 </h3>
-                                <p className="text-sm sm:text-base text-slate-500 mt-2">收工時間Gym Room人山人海，做運動都要排隊等機，大大削弱做Gym嘅恆心。</p>
+                                <p className="text-sm sm:text-base text-slate-500 mt-2">收工時間Gym Room人山人海，做運動都要排隊等機，大大削弱做Gym恆心。</p>
                                 
                             </div>
                             <div className="w-full mt-8 flex justify-center items-end">
@@ -1208,12 +1222,29 @@ return (
         </section>
 
 
+{/* Standalone Premium CTA Section with Apple Scroll Interactions */}
+<section id="transformationCtaSec" className="py-12 bg-white pb-24 overflow-hidden">
+                {/* FIX: Added 'apple-stagger-container' here to activate the scroll engine hook */}
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center apple-stagger-container">
+                    
+                    {/* Centered Button Wrapper (Stagger Item) */}
+                    <div className="apple-stagger-item transition-all duration-[800ms] ease-out opacity-0 translate-y-14 flex flex-col items-center space-y-4">
+                        {/* Optional subtle tagline to anchor the standalone button beautifully */}
+                        <p className="text-xs font-black text-slate-400 uppercase tracking-widest">
+                            READY TO START YOUR TRANSFORMATION?
+                        </p>
+                        
+                        <button 
+                            onClick={() => setModals(prev => ({...prev, checkout: true, selectedPlan: 'Premium 專業無憂方案'}))} 
+                            className="px-10 py-4 bg-[#E67E22] hover:bg-orange-600 text-white font-black text-base rounded-2xl transition-all duration-200 shadow-xl hover:shadow-orange-500/10 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2"
+                        >
+                            <span>立即訂閱 Premium 方案</span>
+                            <ArrowRight size={16} strokeWidth={3} />
+                        </button>
+                    </div>
 
-
-
-
-
-
+                </div>
+            </section>
 
 
 
@@ -1400,18 +1431,83 @@ return (
                 </div>
             )}
 
-            {/* Footer */}
-            <footer className="bg-[#2C3E50] text-white border-t border-slate-300 py-12">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left">
-                    <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-                        <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 bg-[#2ECC71] rounded-lg flex items-center justify-center">
-                                <Dumbbell className="text-[#2C3E50]" size={16} strokeWidth={3} />
-                            </div>
-                            <span className="text-lg font-black tracking-tight text-white">Resist<span className="text-[#2ECC71]">Fit</span></span>
+                {/* Footer */}
+                <footer className="bg-[#2C3E50] text-white border-t border-slate-700/50 pt-16 pb-12">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    {/* Top Tier: Multi-Column Layout */}
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-slate-700/40 text-left">
+                        
+                        {/* Column 1: Brand & Health Disclaimer */}
+                        <div className="md:col-span-2 space-y-4">
+                            
+                            {/* Clean, Linked Image Logo Block matching Header logic */}
+                            <a href="#" className="flex items-center gap-3 group focus:outline-none">
+                                
+                                {/* Logo Image Box (Scaled down for the footer) */}
+                                <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center bg-transparent transition-transform duration-200 group-hover:scale-105">
+                                    <img 
+                                        src="/image/GO-logo.png" // Mapped automatically to your public assets folder
+                                        alt="ResistFit Logo" 
+                                        className="w-full h-full object-contain"
+                                    />
+                                </div>
+                                
+                                {/* Brand Wordmark (If your PNG logo already has text, feel free to delete this <div>) */}
+                                <div>
+                                    <span className="text-lg font-black tracking-tight text-white transition-colors group-hover:text-slate-200">
+                                        Resist<span className="text-[#2ECC71]">Fit</span>
+                                    </span>
+                                </div>
+                                
+                            </a>
+
+                            <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
+                                專為地產經紀 / 久坐人士專屬打造的碎片化彈力訓練平台。隨時隨地，開啟極簡高效的健康日常。
+                            </p>
+                            
+                            {/* Essential Fitness Disclaimer */}
+                            <p className="text-[10px] text-slate-500 leading-relaxed max-w-sm">
+                                * 免責聲明：訓練效果因人而異。本平台內容僅供健康與運動參考，若您有舊患（如腰椎、手肘不適），請在開始任何訓練前諮詢註冊物理治療師或醫療專業人員之意見。
+                            </p>
                         </div>
-                        <p className="text-xs text-white/60">© 2026 ResistFit. All rights reserved. 專為地產經紀 / 久坐人士專屬打造的彈力訓練平台。</p>
+
+                        {/* Column 2: Quick Links */}
+                        <div className="space-y-3">
+                            <h4 className="text-xs font-bold uppercase tracking-wider text-[#2ECC71]">快速連結</h4>
+                            <ul className="space-y-2 text-sm text-slate-400">
+                                <li><a href="#painpoints" className="hover:text-white transition-colors">經紀煩惱</a></li>
+                                <li><a href="#concept" className="hover:text-white transition-colors">隨時訓練</a></li>
+                                <li><a href="#demo" className="hover:text-white transition-colors">3分鐘試玩</a></li>
+                                <li><a href="#transformationSec" className="hover:text-white transition-colors">成果見證</a></li>
+                                <li><a href="#pricing" className="hover:text-white transition-colors">方案價格</a></li>
+                            </ul>
+                        </div>
+
+                        {/* Column 3: Legal & Support */}
+                        <div className="space-y-3">
+                            <h4 className="text-xs font-bold uppercase tracking-wider text-[#2ECC71]">法律與支援</h4>
+                            <ul className="space-y-2 text-sm text-slate-400">
+                                {/* Links directly mapped to your Next.js app route directory structure */}
+                                <li><a href="/terms" className="hover:text-white transition-colors font-medium">服務條款 (T&C)</a></li>
+                                <li><a href="/privacy" className="hover:text-white transition-colors">隱私權政策</a></li>
+                                <li><a href="/cookies" className="hover:text-white transition-colors">Cookie 條款</a></li>
+                                <li className="pt-2 border-t border-slate-700/30">
+                                    <a href="https://wa.me/your-number" target="_blank" rel="noopener noreferrer" className="text-xs bg-slate-800 text-slate-300 hover:text-white px-2.5 py-1.5 rounded border border-slate-700 transition-colors inline-block">
+                                        💬 聯絡真人客服
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
                     </div>
+
+                    {/* Bottom Tier: Copyright */}
+                    <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left text-xs text-slate-500">
+                        <p>© 2026 ResistFit. All rights reserved. 版權所有，不得轉載。</p>
+                        <p className="text-[10px]">Powered by Premium AI Motion Tracking Tech</p>
+                    </div>
+
                 </div>
             </footer>
             </div>
