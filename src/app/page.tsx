@@ -430,7 +430,7 @@ return (
                     {/* Center: Scroll Navigation Links */}
                     <div className="hidden md:flex items-center gap-8">
                         <a href="#painpoints" className="text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">經紀煩惱</a>
-                        <a href="#concept" className="text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">隨時訓練</a>
+                        
                         <a href="#premium-card-3" className="text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">3分鐘試玩</a>
                         {/* FIX: Points to your precise slider ID section */}
                         <a href="#transformationSec" className="text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">成果見證</a>
@@ -1477,7 +1477,7 @@ return (
                             <h4 className="text-xs font-bold uppercase tracking-wider text-[#2ECC71]">快速連結</h4>
                             <ul className="space-y-2 text-sm text-slate-400">
                                 <li><a href="#painpoints" className="hover:text-white transition-colors">經紀煩惱</a></li>
-                                <li><a href="#concept" className="hover:text-white transition-colors">隨時訓練</a></li>
+                                
                                 <li><a href="#demo" className="hover:text-white transition-colors">3分鐘試玩</a></li>
                                 <li><a href="#transformationSec" className="hover:text-white transition-colors">成果見證</a></li>
                                 <li><a href="#pricing" className="hover:text-white transition-colors">方案價格</a></li>
