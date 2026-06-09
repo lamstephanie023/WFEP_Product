@@ -673,13 +673,10 @@ return (
                         <div className="bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between min-h-[480px] pt-10 px-8 border border-slate-100 text-center group">
                             <div className="flex flex-col items-center">
                                 <h3 className="text-xl sm:text-2xl font-bold text-[#2C3E50] tracking-tight leading-snug max-w-[260px] mb-3">
-                                時間成本超高
+                                高時間成本
                                 </h3>
-                                <p className="text-sm sm:text-base text-slate-500 mt-2">執衫、出發、塞車、換衫、沖涼、返歸。前後最少浪費 2 個鐘，對於隨時要企定定、聽電話帶睇樓嘅經紀黎講，根本奢侈。</p>
-                                <a href="#concept" className="text-sm font-semibold text-[#0066cc] hover:underline inline-flex items-center gap-0.5 group/link">
-                                    <span>了解更多隨時訓練方案</span>
-                                    <span className="text-xs transform transition-transform group-hover/link:translate-x-1 font-mono">&gt;</span>
-                                </a>
+                                <p className="text-sm sm:text-base text-slate-500 mt-2">執衫、出門、換衫、沖涼、返屋企，最少要 2.5 小時，返工帶客睇樓已經夠攰，運動要夠輕鬆方便。</p>
+                                
                             </div>
                             <div className="w-full mt-8 flex justify-center items-end">
                                 <img 
@@ -696,11 +693,8 @@ return (
                                 <h3 className="text-xl sm:text-2xl font-bold text-[#2C3E50] tracking-tight leading-snug max-w-[260px] mb-3">
                                 放工時間迫爆
                                 </h3>
-                                <p className="text-sm sm:text-base text-slate-500 mt-2">7 點收工入去Gym房人山人海，一部機有三個人等。你想快快手練完，結果等機等咗大半個鐘，浪費寶貴時間。</p>
-                                <a href="#aicoach" className="text-sm font-semibold text-[#0066cc] hover:underline inline-flex items-center gap-0.5 group/link">
-                                    <span>了解更多 AI 飲食計算</span>
-                                    <span className="text-xs transform transition-transform group-hover/link:translate-x-1 font-mono">&gt;</span>
-                                </a>
+                                <p className="text-sm sm:text-base text-slate-500 mt-2">收工時間Gym Room人山人海，做運動都要排隊等機，大大削弱做Gym嘅恆心。</p>
+                                
                             </div>
                             <div className="w-full mt-8 flex justify-center items-end">
                                 <img 
@@ -715,13 +709,10 @@ return (
                         <div className="bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between min-h-[480px] pt-10 pb-12 px-8 border border-slate-100 text-center group">
                             <div className="flex flex-col items-center">
                                 <h3 className="text-xl sm:text-2xl font-bold text-[#2C3E50] tracking-tight leading-snug max-w-[260px] mb-3">
-                                被迫簽長期合約
+                                Package綁死
                                 </h3>
-                                <p className="text-sm sm:text-base text-slate-500 mt-2">PT日捽夜捽叫你買堂、簽長約。最後工作忙碌，一個月去唔到兩次，白白每個月交月費，壓力反而更大。</p>
-                                <a href="#pricing" className="text-sm font-semibold text-[#0066cc] hover:underline inline-flex items-center gap-0.5 group/link">
-                                    <span>了解更多同行激勵機制</span>
-                                    <span className="text-xs transform transition-transform group-hover/link:translate-x-1 font-mono">&gt;</span>
-                                </a>
+                                <p className="text-sm sm:text-base text-slate-500 mt-2">PT、Gym room要你買堂、簽長約，點知返工忙又攰、一個月去唔到2次，白白交月費，加重經濟壓力。</p>
+                                
                             </div>
                             <div className="w-full mt-auto flex flex-col justify-center items-center px-4">
                                 <p className="text-2xl sm:text-3xl font-black tracking-tight leading-tight bg-clip-text text-transparent bg-gradient-to-br from-orange-400 to-[#2ECC71]">
@@ -1218,63 +1209,10 @@ return (
 
 
 
-{/* PT Remarks Section with Apple Scroll Interactions */}
-<section className="py-16 bg-[#FAFAFA] relative border-t border-slate-200 overflow-hidden">
-                <div id="concept"className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 apple-stagger-container">
-                    
-                    {/* 1. Header Block (Stagger Item #1) */}
-                    <div className="text-center space-y-3 mb-12 apple-stagger-item transition-all duration-[800ms] ease-out opacity-0 translate-y-14">
-                        <span className="px-3 py-1 bg-slate-200 text-[#2C3E50] text-xs font-bold rounded">1:1 Seamless Handover</span>
-                        <h2 className="text-3xl font-black text-[#2C3E50]">業界首創：真人 PT 接力監督系統</h2>
-                        <p className="text-sm text-slate-500 max-w-lg mx-auto">每堂課教練都會詳細記錄你的細節進度，讓下一堂的跟進教練精準上手。</p>
-                    </div>
 
-                    {/* 2. Main Handover Log Card (Stagger Item #2) */}
-                    <div className="apple-stagger-item transition-all duration-[800ms] ease-out opacity-0 translate-y-14 bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-6 shadow-md">
-                        <div className="flex items-center justify-between border-b border-slate-100 pb-4">
-                            <div className="flex items-center gap-3">
-                                <span className="w-3 h-3 rounded-full bg-[#E67E22] animate-pulse"></span>
-                                <h4 className="font-bold text-[#2C3E50] text-base">學員：Leo (地產經紀 / 30歲)</h4>
-                            </div>
-                            <span className="text-xs text-[#E67E22] bg-[#FDF2E9] px-2 py-1 rounded font-bold">訓練日誌 (手肘 & 下腰跟進)</span>
-                        </div>
 
-                        <div className="space-y-6 relative before:absolute before:left-6 before:top-2 before:bottom-2 before:w-0.5 before:bg-[#2C3E50]/20">
-                            {/* PT Log entry A */}
-                            <div className="flex items-start gap-4 relative">
-                                <img src="https://placehold.co/100x100/2ecc71/ffffff?text=PT1" alt="PT A" className="w-12 h-12 rounded-full border-2 border-[#2ECC71] z-10 bg-white" />
-                                <div className="bg-[#FDF2E9] p-4 rounded-xl border border-[#E67E22]/20 flex-1 space-y-2">
-                                    <div className="flex justify-between items-center">
-                                        <h5 className="text-xs font-bold text-[#2C3E50]">交班 PT: Gary (姿勢與物理治療專攻)</h5>
-                                        <span className="text-[10px] text-slate-500 font-mono">2026-05-24 14:15</span>
-                                    </div>
-                                    <p className="text-sm text-slate-700">
-                                        「Leo 剛做完兩堂『坐舖彈力劃船』。觀察到他長期睇樓企太久，下背（腰大肌）極度繃緊，右側臀中肌無力導致深蹲時膝蓋會內扣。已帶領他進行 5 分鐘彈力帶髖關節鬆動。」
-                                    </p>
-                                    <div className="text-[11px] text-[#E67E22] bg-white p-2.5 rounded-lg border border-[#E67E22]/20 font-bold">
-                                        ⚠️ 接班提示：下次訓練請重點看緊他右臀激活。深蹲強度控制在 15kg 拉力內。
-                                    </div>
-                                </div>
-                            </div>
 
-                            {/* PT Log entry B */}
-                            <div className="flex items-start gap-4 relative">
-                                <img src="https://placehold.co/100x100/e67e22/ffffff?text=PT2" alt="PT B" className="w-12 h-12 rounded-full border-2 border-[#E67E22] z-10 bg-white" />
-                                <div className="bg-[#FAFAFA] p-4 rounded-xl border border-slate-200 flex-1 space-y-2">
-                                    <div className="flex justify-between items-center">
-                                        <h5 className="text-xs font-bold text-[#2C3E50]">接班 PT: Victor (力量增肌專攻)</h5>
-                                        <span className="text-[10px] text-slate-500 font-mono">2026-05-25 18:30</span>
-                                    </div>
-                                    <p className="text-sm text-slate-700">
-                                        「收到 Gary 的備忘！今天在舖頭帶他做 15 分鐘『彈力帶側步走（蟹步）』，重點激活右臀。下腰酸痛感由原本 7 分降到 3 分，右膝內扣改善明顯。已記錄其強度並更新下個PT備忘。」
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                </div>
-            </section>
 
 
 
