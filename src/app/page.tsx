@@ -57,7 +57,7 @@ const slides = [
         desc: "開單忙、坐舖悶？食晏、坐舖、碎片時間就可以練，唔阻做嘢又有AI與真人雙重加持嘅彈力帶神級方案！",
         primaryBtn: "AI 專屬熱量估算",
         secondaryBtn: "", // Left empty to remove the button entirely
-        img: "/image/demo-002.png", // Keep your existing image file path here
+        img: "/image/demo-slider-day.png", // Keep your existing image file path here
         hidePlayIcon: true,
         action: "scrollToCard4",
         customPrimaryBtnClass: "bg-[#E67E22] hover:bg-[#D35400] text-white"
@@ -80,7 +80,7 @@ const slides = [
         desc: "高密度雙色編織彈力帶，附有精緻鋁合金扣，是你的隨身攜帶的健身工具。", // Keep original text
         primaryBtn: "產品特性",
         secondaryBtn: "了解更多細節",
-        img: "/image/demo-002.png", // Keep your existing image file path here
+        img: "/image/spare-photo2.png", // Keep your existing image file path here
         hidePlayIcon: true,        // Removes the play symbol
         actionPrimary: "scrollToCard1",   // Target element selector for primary click
         actionSecondary: "scrollToPricing", // Target element selector for secondary click
@@ -93,7 +93,7 @@ const slides = [
         desc: "3個月內完成健身目標（減體脂率、增加肌肉率），下季度續約可獲取低至75折的續約優惠。",
         primaryBtn: "季度挑戰成功價：HK$1,548",
         secondaryBtn: "原價季度續約：HK$2,064",
-        img: "/image/demo-003.png", // Make sure to match your actual image file name
+        img: "/image/slider-05.png", // Make sure to match your actual image file name
         hidePlayIcon: true,
         action: "scrollToPricing",
         customPrimaryBtnClass: "bg-[#E67E22] hover:bg-[#D35400] text-white", // Custom Orange
@@ -670,74 +670,94 @@ return (
 
 {/* Apple-Style 3-Column Reasons Section (Unified Row Fade-In) */}
 <section className="py-20 bg-[#F5F5F7] border-t border-slate-200/50">
-                <div id="painpoints"className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 apple-stagger-container">
-                    
-                    {/* Big Bold Section Title */}
-                    <div className="text-center max-w-3xl mx-auto mb-16 apple-stagger-item transition-all duration-[800ms] ease-out opacity-0 translate-y-14">
-                        <h2 className="text-4xl sm:text-5xl font-black text-[#2C3E50] tracking-tight leading-tight">
-                        去 Gym Room 到底有幾麻煩？
-                        </h2>
-                        <p className="text-sm sm:text-base text-slate-500 mt-2">傳統健身房的隱形成本，往往是消磨你熱情的最大殺手：</p>
-                    </div>
+    <div id="painpoints" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 apple-stagger-container">
+        
+        {/* Big Bold Section Title */}
+        <div className="text-center max-w-3xl mx-auto mb-16 apple-stagger-item transition-all duration-[800ms] ease-out opacity-0 translate-y-14">
+            <h2 className="text-4xl sm:text-5xl font-black text-[#2C3E50] tracking-tight leading-tight">
+            去 Gym Room 到底有幾麻煩？
+            </h2>
+            <p className="text-sm sm:text-base text-slate-500 mt-2">傳統健身房的隱形成本，往往是消磨你熱情的最大殺手：</p>
+        </div>
 
-                    {/* 3 Columns Grid Content Fades Up Completely as One Unit */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 apple-stagger-item transition-all duration-[800ms] ease-out opacity-0 translate-y-14">
-                        
-                        {/* Column 1 */}
-                        <div className="bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between min-h-[480px] pt-10 px-8 border border-slate-100 text-center group">
-                            <div className="flex flex-col items-center">
-                                <h3 className="text-xl sm:text-2xl font-bold text-[#2C3E50] tracking-tight leading-snug max-w-[260px] mb-3">
-                                高時間成本
-                                </h3>
-                                <p className="text-sm sm:text-base text-slate-500 mt-2">執衫、出門、換衫、沖涼、返屋企，最少要 2.5 小時，返工帶客睇樓已經夠攰，運動要夠輕鬆方便。</p>
-                                
-                            </div>
-                            <div className="w-full mt-8 flex justify-center items-end">
-                                <img 
-                                    src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=500&auto=format&fit=crop" 
-                                    alt="Training Space" 
-                                    className="max-h-[220px] w-auto object-contain object-bottom rounded-t-xl transition-transform duration-500 group-hover:scale-[1.02]"
-                                />
-                            </div>
-                        </div>
-
-                        {/* Column 2 */}
-                        <div className="bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between min-h-[480px] pt-10 px-8 border border-slate-100 text-center group">
-                            <div className="flex flex-col items-center">
-                                <h3 className="text-xl sm:text-2xl font-bold text-[#2C3E50] tracking-tight leading-snug max-w-[260px] mb-3">
-                                放工時間迫爆
-                                </h3>
-                                <p className="text-sm sm:text-base text-slate-500 mt-2">收工時間Gym Room人山人海，做運動都要排隊等機，大大削弱做Gym恆心。</p>
-                                
-                            </div>
-                            <div className="w-full mt-8 flex justify-center items-end">
-                                <img 
-                                    src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=500&auto=format&fit=crop" 
-                                    alt="Nutrition Tracking" 
-                                    className="max-h-[220px] w-auto object-contain object-bottom rounded-t-xl transition-transform duration-500 group-hover:scale-[1.02]"
-                                />
-                            </div>
-                        </div>
-
-                        {/* Column 3 */}
-                        <div className="bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between min-h-[480px] pt-10 pb-12 px-8 border border-slate-100 text-center group">
-                            <div className="flex flex-col items-center">
-                                <h3 className="text-xl sm:text-2xl font-bold text-[#2C3E50] tracking-tight leading-snug max-w-[260px] mb-3">
-                                Package綁死
-                                </h3>
-                                <p className="text-sm sm:text-base text-slate-500 mt-2">PT、Gym room要你買堂、簽長約，點知返工忙又攰、一個月去唔到2次，白白交月費，加重經濟壓力。</p>
-                                
-                            </div>
-                            <div className="w-full mt-auto flex flex-col justify-center items-center px-4">
-                                <p className="text-2xl sm:text-3xl font-black tracking-tight leading-tight bg-clip-text text-transparent bg-gradient-to-br from-orange-400 to-[#2ECC71]">
-                                    「AI 教練，幫我規劃今日10分鐘坐舖伸展菜單」
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
+        {/* 3 Columns Grid Content Fades Up Completely as One Unit */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 apple-stagger-item transition-all duration-[800ms] ease-out opacity-0 translate-y-14">
+            
+            {/* Column 1 */}
+            <div className="bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between min-h-[480px] pt-10 px-8 border border-slate-100 text-center group">
+                <div className="flex flex-col items-center">
+                    <h3 className="text-xl sm:text-2xl font-bold text-[#2C3E50] tracking-tight leading-snug max-w-[260px] mb-3">
+                    高時間成本
+                    </h3>
+                    <p className="text-sm sm:text-base text-slate-500 mt-2">執衫、出門、換衫、沖涼、返屋企，最少要 2.5 小時，返工帶客睇樓已經夠攰，運動要夠輕鬆方便。</p>
                 </div>
-            </section>
+                {/* Image Wrapper (Added 'relative' so the gradients snap to this box) */}
+                <div className="relative w-full mt-8 flex justify-center items-end rounded-t-xl overflow-hidden">
+                    {/* White Edge Blur Overlays to seamlessly blend the image */}
+                    <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white via-white/80 to-transparent pointer-events-none z-10"></div>
+                    <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white via-white/80 to-transparent pointer-events-none z-10"></div>
+                    <div className="absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-white via-white/80 to-transparent pointer-events-none z-10"></div>
+                    <div className="absolute bottom-0 inset-x-0 h-8 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none z-10"></div>
+                    
+                    <img 
+                        src="/image/3c-01.png" 
+                        alt="Training Space" 
+                        className="max-h-[220px] w-auto object-contain object-bottom transition-transform duration-500 group-hover:scale-[1.02]"
+                    />
+                </div>
+            </div>
+
+            {/* Column 2 */}
+            <div className="bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between min-h-[480px] pt-10 px-8 border border-slate-100 text-center group">
+                <div className="flex flex-col items-center">
+                    <h3 className="text-xl sm:text-2xl font-bold text-[#2C3E50] tracking-tight leading-snug max-w-[260px] mb-3">
+                    放工時間迫爆
+                    </h3>
+                    <p className="text-sm sm:text-base text-slate-500 mt-2">收工時間Gym Room人山人海，做運動都要排隊等機，大大削弱做Gym恆心。</p>
+                </div>
+                {/* Image Wrapper */}
+                <div className="relative w-full mt-8 flex justify-center items-end rounded-t-xl overflow-hidden">
+                    {/* White Edge Blur Overlays */}
+                    <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white via-white/80 to-transparent pointer-events-none z-10"></div>
+                    <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white via-white/80 to-transparent pointer-events-none z-10"></div>
+                    <div className="absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-white via-white/80 to-transparent pointer-events-none z-10"></div>
+                    <div className="absolute bottom-0 inset-x-0 h-8 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none z-10"></div>
+                    
+                    <img 
+                        src="/image/3c-02.png" 
+                        alt="Nutrition Tracking" 
+                        className="max-h-[220px] w-auto object-contain object-bottom transition-transform duration-500 group-hover:scale-[1.02]"
+                    />
+                </div>
+            </div>
+
+            {/* Column 3 */}
+            <div className="bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between min-h-[480px] pt-10 px-8 border border-slate-100 text-center group">
+                <div className="flex flex-col items-center">
+                    <h3 className="text-xl sm:text-2xl font-bold text-[#2C3E50] tracking-tight leading-snug max-w-[260px] mb-3">
+                    Package綁死
+                    </h3>
+                    <p className="text-sm sm:text-base text-slate-500 mt-2">PT、Gym room要你買堂、簽長約，點知返工忙又攰、一個月去唔到2次，白白交月費，加重經濟壓力。</p>
+                </div>
+                {/* Image Wrapper */}
+                <div className="relative w-full mt-8 flex justify-center items-end rounded-t-xl overflow-hidden">
+                    {/* White Edge Blur Overlays */}
+                    <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white via-white/80 to-transparent pointer-events-none z-10"></div>
+                    <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white via-white/80 to-transparent pointer-events-none z-10"></div>
+                    <div className="absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-white via-white/80 to-transparent pointer-events-none z-10"></div>
+                    <div className="absolute bottom-0 inset-x-0 h-8 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none z-10"></div>
+                    
+                    <img 
+                        src="/image/3c-03.png" 
+                        alt="Nutrition Tracking" 
+                        className="max-h-[220px] w-auto object-contain object-bottom transition-transform duration-500 group-hover:scale-[1.02]"
+                    />
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
 
 
 
@@ -764,38 +784,35 @@ return (
         {/* Stagger Container */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 apple-stagger-container">
             
-            {/* Card 1 - Symmetrical Footprint */}
-            <div id="premium-card-1"className="apple-stagger-item opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between min-h-[600px] lg:min-h-[640px] border border-slate-100 group">
-                <div className="p-10 sm:p-12 flex flex-col items-start text-left">
-                    <span className="text-[11px] font-black tracking-widest text-[#2ECC71] uppercase block mb-2">全新產品</span>
-                    <h3 className="text-2xl sm:text-3xl font-black text-[#2C3E50] tracking-tight mb-3">智能感應彈力帶</h3>
-                    <p className="text-sm sm:text-base text-slate-500 leading-relaxed mb-6 max-w-md">精準追蹤拉伸力道與動作幅度，數據即時同步手機 APP，讓每分鐘碎片的訓練都更有價值。</p>
-                    <button className="px-6 py-2.5 bg-[#2C3E50] hover:bg-slate-800 text-white text-xs font-bold rounded-full transition-colors tracking-wide">
-                        了解更多
-                    </button>
-                </div>
-                <div className="w-full overflow-hidden aspect-[16/10] mt-auto">
-                    <img 
-                        src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1000&auto=format&fit=crop" 
-                        alt="Smart Band" 
-                        className="w-full h-full object-cover object-center group-hover:scale-102 transition duration-700 ease-out"
-                    />
-                </div>
-            </div>
+{/* Card 1 - Symmetrical Footprint */}
+<div id="premium-card-1" className="apple-stagger-item opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between min-h-[600px] lg:min-h-[640px] border border-slate-100 group">
+    <div className="p-10 sm:p-12 flex flex-col items-start text-left">
+        <span className="text-[11px] font-black tracking-widest text-[#2ECC71] uppercase block mb-2">全新產品</span>
+        <h3 className="text-2xl sm:text-3xl font-black text-[#2C3E50] tracking-tight mb-3">智能感應彈力帶</h3>
+        <p className="text-sm sm:text-base text-slate-500 leading-relaxed mb-6 max-w-md">精準追蹤拉伸力道與動作幅度，數據即時同步手機 APP，讓每分鐘碎片的訓練都更有價值。</p>
+    </div>
+    
+    {/* Image Container - Added 'relative' here */}
+    <div className="w-full overflow-hidden aspect-[16/10] mt-auto relative">
+
+        <img 
+            src="/image/4c-01-b.png" 
+            alt="Smart Band" 
+            className="w-full h-full object-cover object-center group-hover:scale-102 transition duration-700 ease-out"
+        />
+    </div>
+</div>
 
             {/* Card 2 - Symmetrical Footprint */}
             <div id="premium-card-2"className="apple-stagger-item opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between min-h-[600px] lg:min-h-[640px] border border-slate-100 group">
                 <div className="p-10 sm:p-12 flex flex-col items-start text-left">
-                    <span className="text-[11px] font-black tracking-widest text-slate-400 uppercase block mb-2">特設功能</span>
+                    <span className="text-[11px] font-black tracking-widest text-[#E67E22] uppercase block mb-2">特設功能</span>
                     <h3 className="text-2xl sm:text-3xl font-black text-[#2C3E50] tracking-tight mb-3">1對1 AI 智能教練</h3>
                     <p className="text-sm sm:text-base text-slate-500 leading-relaxed mb-6 max-w-md">專為地產經紀坐舖、睇樓空檔設計的動作菜單。隨手一拉，即刻激活深層肌肉、注入能量。</p>
-                    <button className="px-6 py-2.5 bg-[#2C3E50] hover:bg-slate-800 text-white text-xs font-bold rounded-full transition-colors tracking-wide">
-                        立即體驗
-                    </button>
                 </div>
                 <div className="w-full overflow-hidden aspect-[16/10] mt-auto">
                     <img 
-                        src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1000&auto=format&fit=crop" 
+                        src="/image/4c-02.jpg" 
                         alt="AI Coach" 
                         className="w-full h-full object-cover object-center group-hover:scale-102 transition duration-700 ease-out"
                     />
@@ -809,7 +826,7 @@ return (
                 {videoState === 'cover' && (
                     <div 
                         className="absolute inset-0 bg-cover bg-center flex flex-col justify-between p-10 sm:p-12 z-40 transition-all duration-300 animate-fadeIn" 
-                        style={{backgroundImage: "url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1000&auto=format&fit=crop')"}}
+                        style={{backgroundImage: "url('/image/4c-03-videoclass.jpg')"}}
                     >
                         <div className="absolute inset-0 bg-[#2C3E50]/65 z-10"></div>
                         
@@ -883,7 +900,7 @@ return (
                 {videoState === 'completed' && (
                     <div 
                         className="absolute inset-0 bg-cover bg-center flex flex-col items-center justify-center p-8 z-50 text-center transition-all duration-300 animate-fadeIn"
-                        style={{backgroundImage: "url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1000&auto=format&fit=crop')"}}
+                        style={{backgroundImage: "url('/image/4c-03-videoclass.jpg')"}}
                     >
                         <div className="absolute inset-0 bg-[#2C3E50]/75 z-10"></div>
                         
@@ -910,7 +927,7 @@ return (
                 {/* Background Image Layers */}
                 <div 
                 className="absolute inset-0 bg-cover bg-center transition-all duration-300 animate-fadeIn z-0" 
-                style={{backgroundImage: "url('/image/demo-001.png')"}}
+                style={{backgroundImage: "url('/image/demo-002.png')"}}
                 />
                 <div className="absolute inset-0 bg-[#2C3E50]/70 z-0"></div>
 

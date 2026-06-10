@@ -17,13 +17,10 @@ const fraunces = Fraunces({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "WFEP Wellness | Calmexa XR",
-    template: "%s | WFEP Wellness",
-  },
-  description:
-    "Shop Calmexa XR — extended-release wellness support. Third-party tested, vegan capsules.",
+// src/app/layout.tsx
+export const metadata = {
+  title: 'ResistFit',
+  description: '...',
 };
 
 export default function RootLayout({
