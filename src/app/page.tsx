@@ -429,13 +429,13 @@ return (
 
                     {/* Center: Scroll Navigation Links */}
                     <div className="hidden md:flex items-center gap-8">
-                        <a href="#painpoints" className="text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">經紀煩惱</a>
+                        <a href="#painpoints" className="apple-hover-btn text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">經紀煩惱</a>
                         
-                        <a href="#premium-card-3" className="text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">3分鐘試玩</a>
+                        <a href="#premium-card-3" className="apple-hover-btn text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">3分鐘試玩</a>
                         {/* FIX: Points to your precise slider ID section */}
-                        <a href="#transformationSec" className="text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">成果見證</a>
-                        <a href="#premium-card-4" className="text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">AI 飲食計算</a>
-                        <a href="#pricing" className="text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">方案價格</a>
+                        <a href="#transformationSec" className="apple-hover-btn text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">成果見證</a>
+                        <a href="#premium-card-4" className="apple-hover-btn text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">AI 飲食計算</a>
+                        <a href="#pricing" className="apple-hover-btn text-white/80 hover:text-[#2ECC71] transition text-sm font-semibold">方案價格</a>
                     </div>
 
                     {/* Right Side: Functional Actions Container (Keeps items safely grouped together) */}
@@ -451,12 +451,12 @@ return (
                                     setModals(prev => ({ ...prev, login: true }));
                                 }
                             }}
-                            className="text-sm font-medium text-slate-300 hover:text-white transition-colors py-2"
+                            className="apple-hover-btn text-sm font-medium text-slate-300 hover:text-white transition-colors py-2"
                         >
                             登入
                         </button>
 
-                        <a href="#pricing" className="px-5 py-2.5 bg-[#E67E22] hover:bg-orange-600 text-white font-bold rounded-xl transition shadow-lg text-sm flex items-center gap-2">
+                        <a href="#pricing" className="apple-hover-card apple-hover-btn px-5 py-2.5 bg-[#E67E22] hover:bg-orange-600 text-white font-bold rounded-xl transition shadow-lg text-sm flex items-center gap-2">
                             <span>立即起步</span>
                             <ArrowRight size={14} strokeWidth={3} />
                         </a>
@@ -562,7 +562,8 @@ return (
                                                             }
                                                         }
                                                     }}
-                                                    className={`px-6 py-2.5 sm:px-8 sm:py-3.5 font-bold text-xs sm:text-sm rounded-full transition duration-200 active:scale-95 flex items-center gap-2 shadow-md ${
+                                                    // ADDED `apple-hover-btn` AND REMOVED `transition duration-200 active:scale-95`
+                                                    className={`apple-hover-btn px-6 py-2.5 sm:px-8 sm:py-3.5 font-bold text-xs sm:text-sm rounded-full flex items-center gap-2 shadow-md ${
                                                         slide.customPrimaryBtnClass ? slide.customPrimaryBtnClass : "bg-white hover:bg-slate-100 text-slate-900"
                                                     }`}
                                                 >
@@ -604,14 +605,15 @@ return (
                                                                 }
                                                             }
                                                         }}
-                                                        className={`px-6 py-2.5 sm:px-8 sm:py-3.5 font-bold text-xs sm:text-sm rounded-full transition duration-200 active:scale-95 flex items-center gap-2 border border-white/10 backdrop-blur-md shadow-md bg-white/20 hover:bg-white/30 text-white ${
+                                                        // ADDED `apple-hover-btn` AND REMOVED `transition duration-200 active:scale-95`
+                                                        className={`apple-hover-btn px-6 py-2.5 sm:px-8 sm:py-3.5 font-bold text-xs sm:text-sm rounded-full flex items-center gap-2 border border-white/10 backdrop-blur-md shadow-md bg-white/20 hover:bg-white/30 text-white ${
                                                             slide.customSecondaryBtnClass ? slide.customSecondaryBtnClass : ""
                                                         }`}
                                                     >
                                                         {slide.secondaryBtn}
                                                     </button>
-                                                )}
-                                            </div>
+                                                    )}
+                                                </div>
                                             
 
 
@@ -653,7 +655,7 @@ return (
                                 e.stopPropagation();
                                 setIsSliderPlaying(!isSliderPlaying);
                             }}
-                            className="text-slate-800 dark:text-white hover:text-[#2ECC71] dark:hover:text-[#2ECC71] transition-colors duration-200 focus:outline-none"
+                            className="apple-hover-btn text-slate-800 dark:text-white hover:text-[#2ECC71] dark:hover:text-[#2ECC71] transition-colors duration-200 focus:outline-none"
                         >
                             {isSliderPlaying ? (
                                 <Pause size={14} fill="currentColor" strokeWidth={1} />
@@ -684,84 +686,73 @@ return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 apple-stagger-item transition-all duration-[800ms] ease-out opacity-0 translate-y-14">
             
             {/* Column 1 */}
-            <div className="bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between min-h-[480px] pt-10 px-8 border border-slate-100 text-center group">
-                <div className="flex flex-col items-center">
-                    <h3 className="text-xl sm:text-2xl font-bold text-[#2C3E50] tracking-tight leading-snug max-w-[260px] mb-3">
-                    高時間成本
-                    </h3>
-                    <p className="text-sm sm:text-base text-slate-500 mt-2">執衫、出門、換衫、沖涼、返屋企，最少要 2.5 小時，返工帶客睇樓已經夠攰，運動要夠輕鬆方便。</p>
-                </div>
-                {/* Image Wrapper (Added 'relative' so the gradients snap to this box) */}
-                <div className="relative w-full mt-8 flex justify-center items-end rounded-t-xl overflow-hidden">
-                    {/* White Edge Blur Overlays to seamlessly blend the image */}
-                    <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white via-white/80 to-transparent pointer-events-none z-10"></div>
-                    <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white via-white/80 to-transparent pointer-events-none z-10"></div>
-                    <div className="absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-white via-white/80 to-transparent pointer-events-none z-10"></div>
-                    <div className="absolute bottom-0 inset-x-0 h-8 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none z-10"></div>
-                    
+            {/* FIX: Changed justify-between to justify-center and unified padding to p-8 */}
+            <div className="apple-hover-card bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-center items-center min-h-[480px] p-8 border border-slate-100 text-center group">
+                
+                {/* Image Wrapper */}
+                {/* FIX: Changed mt-8 to mb-8 to space it perfectly above the title */}
+                <div className="relative w-full mb-8 flex justify-center items-center overflow-hidden">
                     <img 
-                        src="/image/3c-01.png" 
+                        src="/image/icon-01b.png" 
                         alt="Training Space" 
-                        className="max-h-[220px] w-auto object-contain object-bottom transition-transform duration-500 group-hover:scale-[1.02]"
+                        className="max-h-[150px] w-auto object-contain transition-transform duration-500 group-hover:scale-[1.02]"
                     />
                 </div>
+                
+                {/* Text Wrapper */}
+                <div className="flex flex-col items-center">
+                    <h3 className="text-xl sm:text-2xl font-bold text-[#2C3E50] tracking-tight leading-snug mb-3">
+                    高時間成本
+                    </h3>
+                    <p className="text-sm sm:text-base text-slate-500">執衫、出門、換衫、沖涼、返屋企，最少要 2.5 小時，返工帶客睇樓已經夠攰，運動要夠輕鬆方便。</p>
+                </div>
+        
             </div>
 
             {/* Column 2 */}
-            <div className="bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between min-h-[480px] pt-10 px-8 border border-slate-100 text-center group">
-                <div className="flex flex-col items-center">
-                    <h3 className="text-xl sm:text-2xl font-bold text-[#2C3E50] tracking-tight leading-snug max-w-[260px] mb-3">
-                    放工時間迫爆
-                    </h3>
-                    <p className="text-sm sm:text-base text-slate-500 mt-2">收工時間Gym Room人山人海，做運動都要排隊等機，大大削弱做Gym恆心。</p>
-                </div>
-                {/* Image Wrapper */}
-                <div className="relative w-full mt-8 flex justify-center items-end rounded-t-xl overflow-hidden">
-                    {/* White Edge Blur Overlays */}
-                    <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white via-white/80 to-transparent pointer-events-none z-10"></div>
-                    <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white via-white/80 to-transparent pointer-events-none z-10"></div>
-                    <div className="absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-white via-white/80 to-transparent pointer-events-none z-10"></div>
-                    <div className="absolute bottom-0 inset-x-0 h-8 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none z-10"></div>
-                    
+            <div className="apple-hover-card bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-center items-center min-h-[480px] p-8 border border-slate-100 text-center group">
+                
+                <div className="relative w-full mb-8 flex justify-center items-center overflow-hidden">
                     <img 
-                        src="/image/3c-02.png" 
+                        src="/image/icon-02b.png" 
                         alt="Nutrition Tracking" 
-                        className="max-h-[220px] w-auto object-contain object-bottom transition-transform duration-500 group-hover:scale-[1.02]"
+                        className="max-h-[150px] w-auto object-contain transition-transform duration-500 group-hover:scale-[1.02]"
                     />
                 </div>
+                
+                <div className="flex flex-col items-center">
+                    <h3 className="text-xl sm:text-2xl font-bold text-[#2C3E50] tracking-tight leading-snug mb-3">
+                    放工時間迫爆
+                    </h3>
+                    <p className="text-sm sm:text-base text-slate-500">收工時間Gym Room人山人海，做運動都要排隊等機，大大削弱做Gym恆心。</p>
+                </div>
+                
             </div>
 
             {/* Column 3 */}
-            <div className="bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between min-h-[480px] pt-10 px-8 border border-slate-100 text-center group">
-                <div className="flex flex-col items-center">
-                    <h3 className="text-xl sm:text-2xl font-bold text-[#2C3E50] tracking-tight leading-snug max-w-[260px] mb-3">
-                    Package綁死
-                    </h3>
-                    <p className="text-sm sm:text-base text-slate-500 mt-2">PT、Gym room要你買堂、簽長約，點知返工忙又攰、一個月去唔到2次，白白交月費，加重經濟壓力。</p>
-                </div>
+            <div className="apple-hover-card bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-center items-center min-h-[480px] p-8 border border-slate-100 text-center group">
+                
                 {/* Image Wrapper */}
-                <div className="relative w-full mt-8 flex justify-center items-end rounded-t-xl overflow-hidden">
-                    {/* White Edge Blur Overlays */}
-                    <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white via-white/80 to-transparent pointer-events-none z-10"></div>
-                    <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white via-white/80 to-transparent pointer-events-none z-10"></div>
-                    <div className="absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-white via-white/80 to-transparent pointer-events-none z-10"></div>
-                    <div className="absolute bottom-0 inset-x-0 h-8 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none z-10"></div>
-                    
+                <div className="relative w-full mb-8 flex justify-center items-center overflow-hidden">
                     <img 
-                        src="/image/3c-03.png" 
+                        src="/image/icon-03b.png" 
                         alt="Nutrition Tracking" 
-                        className="max-h-[220px] w-auto object-contain object-bottom transition-transform duration-500 group-hover:scale-[1.02]"
+                        className="max-h-[150px] w-auto object-contain transition-transform duration-500 group-hover:scale-[1.02]"
                     />
                 </div>
+                
+                <div className="flex flex-col items-center">
+                    <h3 className="text-xl sm:text-2xl font-bold text-[#2C3E50] tracking-tight leading-snug mb-3">
+                    Package綁死
+                    </h3>
+                    <p className="text-sm sm:text-base text-slate-500">PT、Gym room要你買堂、簽長約，點知返工忙又攰、一個月去唔到2次，白白交月費，加重經濟壓力。</p>
+                </div>
+                
             </div>
 
         </div>
     </div>
 </section>
-
-
-
-
 
 
 
@@ -785,7 +776,7 @@ return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 apple-stagger-container">
             
 {/* Card 1 - Symmetrical Footprint */}
-<div id="premium-card-1" className="apple-stagger-item opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between min-h-[600px] lg:min-h-[640px] border border-slate-100 group">
+<div id="premium-card-1" className="apple-hover-card apple-stagger-item opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between min-h-[600px] lg:min-h-[640px] border border-slate-100 group">
     <div className="p-10 sm:p-12 flex flex-col items-start text-left">
         <span className="text-[11px] font-black tracking-widest text-[#2ECC71] uppercase block mb-2">全新產品</span>
         <h3 className="text-2xl sm:text-3xl font-black text-[#2C3E50] tracking-tight mb-3">智能感應彈力帶</h3>
@@ -804,7 +795,7 @@ return (
 </div>
 
             {/* Card 2 - Symmetrical Footprint */}
-            <div id="premium-card-2"className="apple-stagger-item opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between min-h-[600px] lg:min-h-[640px] border border-slate-100 group">
+            <div id="premium-card-2"className="apple-hover-card apple-stagger-item opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between min-h-[600px] lg:min-h-[640px] border border-slate-100 group">
                 <div className="p-10 sm:p-12 flex flex-col items-start text-left">
                     <span className="text-[11px] font-black tracking-widest text-[#E67E22] uppercase block mb-2">特設功能</span>
                     <h3 className="text-2xl sm:text-3xl font-black text-[#2C3E50] tracking-tight mb-3">1對1 AI 智能教練</h3>
@@ -820,7 +811,7 @@ return (
             </div>
 
             {/* Card 3 - Symmetrical Footprint Full-Container Video Player */}
-            <div id="premium-card-3"className="apple-stagger-item opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] bg-[#2C3E50] rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all min-h-[600px] lg:min-h-[640px] border border-slate-100 group relative">
+            <div id="premium-card-3"className="apple-hover-card apple-stagger-item opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] bg-[#2C3E50] rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all min-h-[600px] lg:min-h-[640px] border border-slate-100 group relative">
                 
                 {/* STATE 1: FULL-SIZE COVER VIEW */}
                 {videoState === 'cover' && (
@@ -839,7 +830,7 @@ return (
                         <div className="relative z-20 flex flex-col items-center justify-center my-auto space-y-4 w-full text-center">
                             <button 
                                 onClick={handlePlayPause} 
-                                className="w-20 h-20 bg-[#E67E22] hover:bg-orange-500 text-white rounded-full flex items-center justify-center shadow-2xl transition transform hover:scale-110 dynamic-glow mb-1"
+                                className="apple-hover-btn w-20 h-20 bg-[#E67E22] hover:bg-orange-500 text-white rounded-full flex items-center justify-center shadow-2xl transition transform hover:scale-110 dynamic-glow mb-1"
                             >
                                 <Play size={36} className="ml-1.5" />
                             </button>
@@ -886,7 +877,7 @@ return (
                                 <div className="bg-[#2ECC71] h-full transition-all duration-300" style={{width: `${videoProgress}%`}}></div>
                             </div>
                             <div className="flex justify-between items-center text-xs text-white">
-                                <button onClick={handlePlayPause} className="text-[#2ECC71] hover:text-white font-bold flex items-center gap-1">
+                                <button onClick={handlePlayPause} className="apple-hover-btn text-[#2ECC71] hover:text-white font-bold flex items-center gap-1">
                                     {isPaused ? <Play size={14}/> : <Pause size={14}/>} {isPaused ? "播放" : "暫停"}
                                 </button>
                                 <span>已消耗：<strong className="text-[#E67E22]">{kcalBurned}</strong> kcal</span>
@@ -913,8 +904,8 @@ return (
                                 <p className="text-sm text-slate-200 max-w-xs mx-auto leading-relaxed">你已成功激活背部肌群並舒緩久坐壓力。解鎖全系列獲取完整百堂碎片操訓練！</p>
                             </div>
                             <div className="flex gap-3 w-full max-w-xs justify-center">
-                                <button onClick={handlePlayPause} className="flex-1 px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-[#2C3E50] text-xs font-bold rounded-xl transition border border-slate-200">重新播放</button>
-                                <a href="#pricing" className="flex-1 px-4 py-2.5 bg-[#E67E22] hover:bg-orange-600 text-white font-black text-xs rounded-xl transition shadow-md text-center">解鎖全系列</a>
+                                <button onClick={handlePlayPause} className="apple-hover-btn flex-1 px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-[#2C3E50] text-xs font-bold rounded-xl transition border border-slate-200">重新播放</button>
+                                <a href="#pricing" className="apple-hover-btn flex-1 px-4 py-2.5 bg-[#E67E22] hover:bg-orange-600 text-white font-black text-xs rounded-xl transition shadow-md text-center">解鎖全系列</a>
                             </div>
                         </div>
                     </div>
@@ -922,7 +913,7 @@ return (
             </div>
 
             {/* Card 4 - Symmetrical Footprint Interactive AI Coaching Module */}
-            <div id="premium-card-4"className="apple-stagger-item opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between min-h-[600px] lg:min-h-[640px] border border-slate-100 group relative">
+            <div id="premium-card-4"className="apple-hover-card apple-stagger-item opacity-0 translate-y-14 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between min-h-[600px] lg:min-h-[640px] border border-slate-100 group relative">
                 
                 {/* Background Image Layers */}
                 <div 
@@ -985,7 +976,7 @@ return (
                         <div className="pt-1 relative z-10">
                             <button 
                                 onClick={generateAICoaching} 
-                                className="w-full py-2.5 bg-[#2ECC71] hover:bg-emerald-600 text-white text-xs font-black rounded-xl transition-all shadow-md flex items-center justify-center gap-2 glow-green tracking-wide transform active:scale-[0.99]"
+                                className="apple-hover-btn w-full py-2.5 bg-[#2ECC71] hover:bg-emerald-600 text-white text-xs font-black rounded-xl transition-all shadow-md flex items-center justify-center gap-2 glow-green tracking-wide transform active:scale-[0.99]"
                             >
                                 <Sparkles size={13} />
                                 <span>使用 AI 生成專屬訓練與飲食指南</span>
@@ -1054,7 +1045,7 @@ return (
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto apple-stagger-container">
                         
                         {/* Pricing Card 1: Stagger Item (Appears First) */}
-                        <div className="apple-stagger-item transition-all duration-[800ms] ease-out opacity-0 translate-y-14 bg-[#FAFAFA] rounded-3xl border border-slate-200 p-8 flex flex-col justify-between space-y-8 relative hover:border-[#2ECC71]/50 transition duration-300 shadow-md">
+                        <div className="apple-hover-card apple-stagger-item transition-all duration-[800ms] ease-out opacity-0 translate-y-14 bg-[#FAFAFA] rounded-3xl border border-slate-200 p-8 flex flex-col justify-between space-y-8 relative hover:border-[#2ECC71]/50 transition duration-300 shadow-md">
                             <div className="space-y-6">
                                 <div className="flex justify-between items-start">
                                     <div>
@@ -1094,13 +1085,13 @@ return (
                                     </li>
                                 </ul>
                             </div>
-                            <button onClick={() => setModals(prev => ({...prev, checkout: true, selectedPlan: 'All-in-one 基礎方案'}))} className="w-full py-4 bg-[#2C3E50] hover:bg-slate-700 text-white font-extrabold rounded-2xl transition shadow-md">
+                            <button onClick={() => setModals(prev => ({...prev, checkout: true, selectedPlan: 'All-in-one 基礎方案'}))} className="apple-hover-btn w-full py-4 bg-[#2C3E50] hover:bg-slate-700 text-white font-extrabold rounded-2xl transition shadow-md">
                                 立即訂閱基礎方案
                             </button>
                         </div>
 
                         {/* Pricing Card 2: Stagger Item (Appears Second with 180ms delay) */}
-                        <div className="apple-stagger-item transition-all duration-[800ms] ease-out opacity-0 translate-y-14 bg-white rounded-3xl border-4 border-[#E67E22] p-8 flex flex-col justify-between space-y-8 relative shadow-2xl scale-100 lg:scale-105 transition glow-orange">
+                        <div className="apple-hover-card apple-stagger-item transition-all duration-[800ms] ease-out opacity-0 translate-y-14 bg-white rounded-3xl border-4 border-[#E67E22] p-8 flex flex-col justify-between space-y-8 relative shadow-2xl scale-100 lg:scale-105 transition glow-orange">
                             <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#E67E22] text-white font-black text-xs px-4 py-1.5 rounded-full tracking-wider uppercase shadow-md whitespace-nowrap">
                                 🏆 最多經紀強烈推薦
                             </div>
@@ -1144,7 +1135,7 @@ return (
                                     </li>
                                 </ul>
                             </div>
-                            <button onClick={() => setModals(prev => ({...prev, checkout: true, selectedPlan: 'Premium 專業無憂方案'}))} className="w-full py-4 bg-[#E67E22] hover:bg-orange-600 text-white font-black rounded-2xl transition shadow-xl transform hover:-translate-y-0.5">
+                            <button onClick={() => setModals(prev => ({...prev, checkout: true, selectedPlan: 'Premium 專業無憂方案'}))} className="apple-hover-btn w-full py-4 bg-[#E67E22] hover:bg-orange-600 text-white font-black rounded-2xl transition shadow-xl transform hover:-translate-y-0.5">
                                 立即訂閱 Premium 方案
                             </button>
                         </div>
@@ -1253,7 +1244,7 @@ return (
                         
                         <button 
                             onClick={() => setModals(prev => ({...prev, checkout: true, selectedPlan: 'Premium 專業無憂方案'}))} 
-                            className="px-10 py-4 bg-[#E67E22] hover:bg-orange-600 text-white font-black text-base rounded-2xl transition-all duration-200 shadow-xl hover:shadow-orange-500/10 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2"
+                            className="apple-hover-card apple-hover-btn px-10 py-4 bg-[#E67E22] hover:bg-orange-600 text-white font-black text-base rounded-2xl transition-all duration-200 shadow-xl hover:shadow-orange-500/10 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2"
                         >
                             <span>立即訂閱 Premium 方案</span>
                             <ArrowRight size={16} strokeWidth={3} />
@@ -1423,7 +1414,7 @@ return (
                             <div className="text-xs text-slate-600 bg-[#E8F5E9] p-4 rounded-lg border border-[#2ECC71]/10 leading-relaxed">
                                 訂閱後，我們的 1:1 真人 PT 將於 1 小時內通過 WhatsApp 聯絡您，並在 24 小時內寄出首套彈力帶與開通 AI Guidelines 權限。
                             </div>
-                            <button type="submit" className="w-full py-4 bg-[#E67E22] hover:bg-orange-600 text-white font-black rounded-xl transition shadow-lg">
+                            <button type="submit" className="apple-hover-btn w-full py-4 bg-[#E67E22] hover:bg-orange-600 text-white font-black rounded-xl transition shadow-lg">
                                 確認並立即加入
                             </button>
                         </form>
@@ -1441,7 +1432,7 @@ return (
                             <h3 className="text-xl font-black text-[#2C3E50] font-sans">{modals.alertTitle}</h3>
                             <p className="text-sm text-slate-600 leading-relaxed">{modals.alertMessage}</p>
                         </div>
-                        <button onClick={() => setModals(prev => ({...prev, alert: false}))} className="w-full py-3 bg-[#2ECC71] hover:bg-emerald-600 text-white font-black rounded-xl transition shadow-md">
+                        <button onClick={() => setModals(prev => ({...prev, alert: false}))} className="apple-hover-btn w-full py-3 bg-[#2ECC71] hover:bg-emerald-600 text-white font-black rounded-xl transition shadow-md">
                             我知道了
                         </button>
                     </div>
@@ -1494,8 +1485,8 @@ return (
                             <h4 className="text-xs font-bold uppercase tracking-wider text-[#2ECC71]">快速連結</h4>
                             <ul className="space-y-2 text-sm text-slate-400">
                                 <li><a href="#painpoints" className="hover:text-white transition-colors">經紀煩惱</a></li>
-                                
                                 <li><a href="#demo" className="hover:text-white transition-colors">3分鐘試玩</a></li>
+                                <li><a href="#premium-card-4" className="hover:text-white transition-colors">AI 飲食計算</a></li>
                                 <li><a href="#transformationSec" className="hover:text-white transition-colors">成果見證</a></li>
                                 <li><a href="#pricing" className="hover:text-white transition-colors">方案價格</a></li>
                             </ul>
